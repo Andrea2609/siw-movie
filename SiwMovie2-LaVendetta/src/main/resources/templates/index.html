@@ -10,7 +10,13 @@
 
 <body>
 	<header>
-		
+		<div th:if="${#request.userPrincipal}">
+			Ciao <span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a class="labelLogin" href="/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a class="labelLogin" href="/login">Login</a>
+		</div>
 	</header>
 
 	<div><img src="/images/logo-siw.png" width="50%" /></div>

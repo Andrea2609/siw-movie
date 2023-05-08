@@ -14,34 +14,34 @@
 			<span th:text="${#request.userPrincipal.principal.username}"></span>
 			<a href="/logout">Logout</a>
 		</div>
-		<div th:unless="${#request.userPrincipal}">
-			<a href="/login">Login</a>
+		<div  th:unless="${#request.userPrincipal}">
+			<a class="labelLogin" href="/login">Login</a>
 		</div>
 	</header>
 
+	<center>
 	<div>
 		<a href="/"><img src="/images/logo-siw.png" width="50%"/></a>
 	</div>
-	<h1>Login</h1>
-	<form th:action="@{/login}" method="POST">
+	
+	<form class="table" th:action="@{/login}" method="POST">
+		<h1>Login</h1>
 			<div>
-				<span>Username:</span>
-				<span><input name="username" type="text" required /></span>
+				<span><input name="username" placeholder="Username" type="text" required /></span>
 			</div>
 			<div>
-				<span>Password:</span>
-				<span><input name="password" type="password" required /></span>
+				<span><input name="password" placeholder="Password" type="password" required /></span>
 			</div>
 			<div>
 				<span th:if="${param.error != null}">Username o password errati</span>
 			</div>
 			<div>
-				<span><button type="submit">Login</button></span>
+				<span><button class="login" type="submit">Login</button></span>
 			</div>
-	</form>
-	<div>
-		<a th:href="@{/register}" th:text="Registrati">Registrati</a>
-	</div>
+	
+		<a class="Register" th:href="@{/register}" th:text="Registrati">Registrati</a>
+		</form>
+	</center>
 </body>
 
 </html>

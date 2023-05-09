@@ -1,11 +1,39 @@
 body { 
-    font-family: "Geneva";
-    color:dimgrey;
+	margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+	min-height: 100vh;
+    background:linear-gradient(to bottom, rgb(128, 128, 128), rgb(128, 255, 128), rgb(0, 128, 0)) ;
+}
+
+nav{
+	width: 100%;
+	padding: 0px 30px;
+	background:rgb(98, 192, 144) ;
+}
+
+.menu{
+	list-style: none;
+	margin-top: 0px;
+}
+
+.menu li{
+	display: inline-block;
+	text-transform: uppercase;
+	font-size: 25px;
+}
+.menu a{
+	display: grid ;
+	justify-content: end;
+	padding: 15px 30px;
+	text-transform: none;
+	transition: .3s;
 }
 
 a { 
-	text-decoration: none; 
-    color: darkgrey;
+	text-decoration: none;
+	color: black;
+	font-size: 20px;
+	position: relative;
 }
 
 a:hover { 
@@ -19,11 +47,11 @@ label {
 
 header {
   background-color: rgb(98, 192, 144);
-  color: white;
-  height: 1.5em;
-  margin-bottom: 0.5em;
-  padding: 0.2em;
-  text-align: right; 
+  color: rgb(0, 0, 0);
+  height: 2.5em;
+  width: 100%;
+  padding: 0 30px;
+  margin-bottom: 10px;
 }
 
 header a { 
@@ -36,7 +64,7 @@ a.labelLogin{
 	font-family: Arial, Helvetica, sans-serif;
 	color: black;
 	font-size: 100%;
-	margin-right: 10px;
+	margin-right:1px;
 }
 
 
@@ -59,7 +87,7 @@ button.login{
   cursor: pointer;
   border: 2px solid white;
   border-radius: 100px;
-  font-weight: 600;
+  font-weight:600;
   margin: 10px;
   width: 220px;
   padding: 10px;
@@ -73,7 +101,7 @@ button.login:hover{
 	background-color: white;
 }
 
-a.Register{
+a.register{
 	
 	color: black;
 	cursor: pointer;
@@ -85,10 +113,30 @@ a.Register{
   	padding: 10px;
   	background-color: lightgreen;
   	transition: 0.4s;
+  	font-weight: 600;
 }
 
-a.Register:hover{
-	text-decoration: none;
+a.register:hover{
+ 	text-decoration: none;
 	border: 2px solid lightgreen;
 	background-color: white;
+}
+
+div.menu a{
+	font-size: 20px;
+	color: black;
+}
+span img{
+	border: 1px solid #ddd;
+	border-radius: 4px;
+ 	padding: 5px;
+  	width: 150px;
+}
+
+div.artist p{
+	font-size: 20px;
+}
+
+span p{
+	margin: 0px 10px;
 }

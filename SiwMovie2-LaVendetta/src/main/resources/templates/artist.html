@@ -18,10 +18,11 @@
 
 	<div><a href="/"><img src="/images/logo-siw.png" width="50%"/></a></div>
     <h1>Dettagli Artista</h1>
-    <div th:if="${artist}">
-        <span th:text="${artist.name} + ' ' + ${artist.surname}">Dino Risi</span>
-        <span th:text="'(' + ${artist.dateOfBirth} + ')'">20/20/2000</span>
-        <span><img width="5%" th:src=${artist.urlOfPicture} /></span>
+    <div class="artist" th:if="${artist}">
+        <p th:text="'Nome: ' + ${artist.name}">Dino Risi</p>
+        <p th:text="'Cognome: ' + ${artist.surname}">Dino Risi</p>
+        <p th:text="'Data di nascita: ' + ${artist.dateOfBirth}">20/20/2000</p>
+        <span><img th:src=${artist.urlOfPicture} /></span>
     </div>
     <div th:unless="${artist}">Non esiste</div>
   </body>

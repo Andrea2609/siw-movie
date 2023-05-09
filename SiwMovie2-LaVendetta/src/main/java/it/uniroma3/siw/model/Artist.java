@@ -25,7 +25,7 @@ public class Artist {
 	private String name;
 	private String surname;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd-MM-YYYY")
 	private LocalDate dateOfBirth;
 	private String urlOfPicture;
 	

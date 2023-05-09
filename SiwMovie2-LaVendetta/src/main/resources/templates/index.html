@@ -16,15 +16,18 @@
 		</div>
 		<div th:unless="${#request.userPrincipal}">
 			<a class="labelLogin" href="/login">Login</a>
+			<a class="labelLogin">/</a>
+			<a class="labelLogin" href="/login">Register</a>
 		</div>
 	</header>
-
-	<div><img src="/images/logo-siw.png" width="50%" /></div>
+	
+	<div><center><img src="/images/logo-siw.png" width="30%"/></center></div>
 	<h1>Consulta l'archivio</h1>
-	<div>
+	
+	<div class="menu">
 		<a href="/movie">Elenco Film</a>
 	</div>
-	<div>
+	<div class="menu">
 		<a href="/artist">Elenco Artisti</a>
 	</div>
 </body>

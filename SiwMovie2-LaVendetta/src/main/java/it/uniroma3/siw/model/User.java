@@ -2,10 +2,12 @@ package it.uniroma3.siw.model;
 
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +21,9 @@ public class User {
 	private String surname;
 	private String email;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	private Rewiew rewiew;
+	
     public Long getId() {
 		return id;
 	}
@@ -48,6 +53,14 @@ public class User {
 	
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Rewiew getRewiew() {
+		return rewiew;
+	}
+
+	public void setRewiew(Rewiew rewiew) {
+		this.rewiew = rewiew;
 	}
 
 	@Override

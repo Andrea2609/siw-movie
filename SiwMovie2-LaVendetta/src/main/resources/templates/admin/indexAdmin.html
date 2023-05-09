@@ -9,17 +9,15 @@
 </head>
 
 <body>
-	<header>
-		<div th:if="${#request.userPrincipal}">
-			<span th:text="${#request.userPrincipal.principal.username}"></span>
-			<a href="/logout">Logout</a>
-		</div>
-		<div th:unless="${#request.userPrincipal}">
-			<a href="/login">Login</a>
-		</div>
-	</header>
+	<nav>
+		<ul class="menu">
+			<li><a href="#">CIAO</a></li>
+			<li><a href="#">CIAO</a></li>
+			<li><a href="#">CIAO</a></li>
+		</ul>
+	</nav>
 
-	<div><img src="/images/logo-siw.png" width="50%" /></div>
+	<center><div><img src="/images/logo-siw.png" width="30%" /></div></center>
 	<h1>Consulta l'archivio</h1>
 	<div>
 		<a href="/movie">Elenco Film</a>

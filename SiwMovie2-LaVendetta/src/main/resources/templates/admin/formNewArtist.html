@@ -6,18 +6,28 @@
 		New Artist
 	</title>
 	<link rel="stylesheet" href="/css/stile.css" />
+	<script src="https://kit.fontawesome.com/911a8faad0.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-	<header>
-		<div th:if="${#request.userPrincipal}">
-			<span th:text="${#request.userPrincipal.principal.username}"></span>
-			<a href="/logout">Logout</a>
-		</div>
-		<div th:unless="${#request.userPrincipal}">
-			<a href="/login">Login</a>
-		</div>
-	</header>
+	<nav>
+		<ul class="menu">
+			<li>
+				<a href="/"><i class="fa-solid fa-house"></i></a>
+			</li>
+			<li th:if="${#request.userPrincipal}"> 
+				<span th:text="'ciao ' + ${#request.userPrincipal.principal.username}"></span> 
+			</li>
+			<li th:if="${#request.userPrincipal}"> 
+				<a class="" href="/logout">Logout</a>
+			</li>
+			
+			<li th:unless="${#request.userPrincipal}">
+				<a class="" href="/login">Login/Register</a>
+			</li>
+			<li><a href="/formSearchMovies">Cerca Film</a></li>
+		</ul>
+	</nav>
 
 	<div><a href="/"><img src="/images/logo-siw.png" width="50%"/></a></div>
 	<h1>Aggiungi un artista</h1>

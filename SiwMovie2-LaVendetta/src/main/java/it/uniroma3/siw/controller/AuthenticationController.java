@@ -1,5 +1,8 @@
 package it.uniroma3.siw.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,14 +56,21 @@ public class AuthenticationController {
 	}
 		
     @GetMapping(value = "/success")
-    public String defaultAfterLogin(Model model) {
-        
-    	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public String defaultAfterLogin(Model model) {        
+    	Authentication currentAuthentication = SecurityContextHolder.getContext().getAuthentication();
+    	List<String> authorities = currentAuthentication.getAuthorities().stream().map(authority -> (authority.getAuthority())).collect(Collectors.toList());
+    	if(authorities.isEmpty() || authorities.contains("ROLE_ANONYMOUS") || authorities.contains("DEFAULT")) {
+    		System.out.print(authorities);
+    		return "redirect:/";
+    	}
+    	
+    	UserDetails userDetails = (UserDetails)currentAuthentication.getPrincipal();
     	Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
-    	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
+    	if (credentials.getRole() != null && credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
             return "admin/indexAdmin.html";
         }
-        return "index.html";
+    	
+    	return "redirect:/";
     }
 
 	@PostMapping(value = { "/register" })

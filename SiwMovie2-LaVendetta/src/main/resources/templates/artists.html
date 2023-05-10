@@ -4,28 +4,44 @@
 <head>
 	<title>Artisti</title>
 	<link rel="stylesheet" href="/css/stile.css" />
+	<script src="https://kit.fontawesome.com/911a8faad0.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-	<header>
-		<div th:if="${#request.userPrincipal}">
-			<span th:text="${#request.userPrincipal.principal.username}"></span>
-			<a href="/logout">Logout</a>
-		</div>
-		<div th:unless="${#request.userPrincipal}">
-			<a href="/login">Login</a>
-		</div>
-	</header>
+	<nav>
+		<ul class="menu">
+			<li>
+				<a href="/"><i class="fa-solid fa-house"></i></a>
+			</li>
+			<li th:if="${#request.userPrincipal}"> 
+				<span th:text="'ciao ' + ${#request.userPrincipal.principal.username}"></span> 
+			</li>
+			<li th:if="${#request.userPrincipal}"> 
+				<a class="" href="/logout">Logout</a>
+			</li>
+			
+			<li th:unless="${#request.userPrincipal}">
+				<a class="" href="/login">Login/Register</a>
+			</li>
+			<li><a href="/formSearchMovies">Cerca Film</a></li>
+		</ul>
+	</nav>
 
-	<div><a href="/"><img src="/images/logo-siw.png" width="50%"/></a></div>
-	<h1>Artisti</h1>
-	<div th:if="${artists==null || artists.isEmpty()}">Non ci sono artisti nel sistema</div>
-	<ul>
-		<li th:each="artist : ${artists}">
-			<a th:href="@{'/artist' + '/' + ${artist.id}}"
-				th:text="${artist.name} + ' ' + ${artist.surname}">Dino Risi</a>
-		</li>
-	</ul>
+	<center>
+		<div><img src="/images/logo-siw.png" width="30%"/></div>
+		
+		
+		<h1>Artisti</h1>
+		<div th:if="${artists==null || artists.isEmpty()}">Non ci sono artisti nel sistema</div>
+		
+		<div class="artists">
+				<div class="artist" th:each="artist : ${artists}">
+						<a th:href="@{'/artist' + '/' + ${artist.id}}"><img th:src="${artist.urlOfPicture}"/></a>
+						<a class="artistTitle" th:href="@{'/artist' + '/' + ${artist.id}}" th:text="${artist.name} + ' ' + ${artist.surname}">Dino Risi</a>				
+				</div>
+		</div>
+	
+	</center>
 </body>
 
 </html>

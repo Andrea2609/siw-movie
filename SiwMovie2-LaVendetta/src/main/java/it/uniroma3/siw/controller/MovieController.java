@@ -104,12 +104,8 @@ public class MovieController {
 
 	@GetMapping("/movie")
 	public String getMovies(Model model) {
-		
-    	//UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		//Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
 
 		model.addAttribute("movies", this.movieRepository.findAll());
-		//model.addAttribute("user", credentials.getUser());
 		return "movies.html";
 	}
 	

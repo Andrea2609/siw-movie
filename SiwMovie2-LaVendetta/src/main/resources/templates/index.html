@@ -6,20 +6,28 @@
 		SiwMovie - Homepage
 	</title>
 	<link rel="stylesheet" href="/css/stile.css" />
+	<script src="https://kit.fontawesome.com/911a8faad0.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-	<header>
-		<div th:if="${#request.userPrincipal}">
-			Ciao <span th:text="${#request.userPrincipal.principal.username}"></span>
-			<a class="labelLogin" href="/logout">Logout</a>
-		</div>
-		<div th:unless="${#request.userPrincipal}">
-			<a class="labelLogin" href="/login">Login</a>
-			<a class="labelLogin">/</a>
-			<a class="labelLogin" href="/login">Register</a>
-		</div>
-	</header>
+	<nav>
+		<ul class="menu">
+			<li>
+				<a href="/"><i class="fa-solid fa-house"></i></a>
+			</li>
+			<li th:if="${#request.userPrincipal}"> 
+				<span th:text="'ciao ' + ${#request.userPrincipal.principal.username}"></span> 
+			</li>
+			<li th:if="${#request.userPrincipal}"> 
+				<a class="" href="/logout">Logout</a>
+			</li>
+			
+			<li th:unless="${#request.userPrincipal}">
+				<a class="" href="/login">Login/Register</a>
+			</li>
+			<li><a href="/formSearchMovies">Cerca Film</a></li>
+		</ul>
+	</nav>
 	
 	<center>
 		<div><img src="/images/logo-siw.png" width="30%"/></div>
@@ -27,8 +35,8 @@
 	</center>
 	
 	<ul class="indexMenu">
-		<li class="indexMenuItem"><span href="/movie">Elenco Film</span></li>
-		<li class="indexMenuItem"><span href="/artist">Elenco Artisti</span></li>
+		<li class="indexMenuItem"><a href="/movie">Elenco Film</a></li>
+		<li class="indexMenuItem"><a href="/artist">Elenco Artisti</a></li>
 	</ul>
 </body>
 

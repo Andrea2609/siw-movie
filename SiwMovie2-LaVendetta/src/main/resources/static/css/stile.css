@@ -140,3 +140,35 @@ div.artist p{
 span p{
 	margin: 0px 10px;
 }
+
+ul.indexMenu {
+	display: flex;
+	justify-content: space-around;
+	list-style: none;
+	text-transform: uppercase;
+	align-items: flex-start;
+}
+
+li.indexMenuItem{
+	
+	height: 40px;
+	margin: 10px auto;
+	justify-content: center;
+	display: block;
+	color: rgb(0, 0, 0);
+	background: rgb(0, 255, 0);
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 20px;
+	outline: none;
+	border: none;
+	border-radius: 5px;
+	transition: .2s ease-in;
+	cursor: pointer;
+	
+}
+
+li.indexMenuItem:hover{
+	text-decoration: none;
+	background: #6d44b8;
+}

@@ -9,10 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.mapping.List;
 
 @Entity
 public class Movie {
@@ -36,6 +39,17 @@ public class Movie {
 	
 	@ManyToMany
 	private Set<Artist> actors;
+
+	@OneToMany(mappedBy = "movie")
+	private Set<Rewiew> movieRewiews;
+
+	public Set<Rewiew> getMovieRewiews() {
+		return movieRewiews;
+	}
+
+	public void setMovieRewiews(Set<Rewiew> movieRewiews) {
+		this.movieRewiews = movieRewiews;
+	}
 
 	public Long getId() {
 		return id;

@@ -3,13 +3,14 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 	min-height: 100vh;
 	width: 100%;
-    background:linear-gradient(to bottom, rgb(128, 128, 128), rgb(158, 158, 158), rgb(192, 192, 192)) ;
+    background:rgb(97, 97, 97);
 }
 
 nav{
 	width: 100%;
 	padding: 0px;
 	background:rgb(98, 192, 144) ;
+	font-weight: bold;
 }
 
 .menu{
@@ -101,13 +102,13 @@ button.login{
   margin: 10px;
   width: 220px;
   padding: 10px;
-  background-color: lightgreen;
+  background-color: rgb(98, 192, 144);
   transition: 0.4s;
   
 }
 
 button.login:hover{
-	border: 2px solid lightgreen;
+	border: 2px solid rgb(98, 192, 144) ;
 	background-color: white;
 }
 
@@ -121,14 +122,14 @@ a.register{
   	width: 200px;
   	display: inline-block;
   	padding: 10px;
-  	background-color: lightgreen;
+  	background-color: rgb(98, 192, 144);
   	transition: 0.4s;
   	font-weight: 600;
 }
 
 a.register:hover{
  	text-decoration: none;
-	border: 2px solid lightgreen;
+	border: 2px solid rgb(98, 192, 144);
 	background-color: white;
 }
 
@@ -153,10 +154,15 @@ span p{
 
 ul.indexMenu {
 	display: flex;
-	justify-content: space-around;
 	list-style: none;
 	text-transform: uppercase;
 	align-items: flex-start;
+	flex-direction: column;
+}
+
+.indexMenu h1{
+	display: flex;
+	text-transform: full-size-kana;
 }
 
 li.indexMenuItem{
@@ -167,7 +173,7 @@ li.indexMenuItem{
 	justify-content: center;
 	display: block;
 	color: rgb(0, 0, 0);
-	background: lightgreen;
+	background: rgb(98, 192, 144);
 	font-size: 20px;
 	margin-top: 20px;
 	outline: none;
@@ -193,26 +199,36 @@ li.indexMenuItem:hover{
 
 /********************************************MOVIE*******************************************/
 
-div.movie img.logo{
-	margin-bottom: 100px;
+.logo{
+	margin-bottom: 70px;
 }
-div.movie div{
+.movie {
+	flex-wrap: wrap;
 	margin: 10px;
-	display: inline-flex;
+	display: flex;
 	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	width: 760px;
+	justify-content: space-evenly;
+	flex-direction: row;
+	width: 100%;
 }
 
-div.movie div img.filmImage{
+.filmImage{
 	width: 350px;
 	height: 500px;
-	image-rendering: auto;
 	border-radius: 10px;
 }
-div.movie h2{
-	margin-bottom: 10px;
+.movie h2{
+	font-weight: 200;
+	margin: 0px;
+	color: rgb(98, 192, 144);
+	background-color: black;
+	width: 100%;
+}
+
+.regista{
+	align-self: center;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
 }
 
 
@@ -228,6 +244,68 @@ div.actors img{
 	border-radius: 100px;
 }
 
+.actors{
+	flex-wrap: wrap;
+	margin: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	flex-direction: column;
+	width: 45%;
+}
+
+.listActors{
+	color: white;
+	margin: 0px;
+	flex-wrap: wrap;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	flex-direction: row;
+	width: 100%;
+	border-radius: 5px;
+	background-color: rgb(63, 63, 63);
+}
+
+.listDirector{
+	color: white;
+	margin: 0px;
+	flex-wrap: wrap;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	flex-direction: row;
+	width: 100%;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;	
+	background-color: rgb(63, 63, 63);
+}
+
+.listDirector img,
+.listActors img{
+	margin: 30px;
+}
+
+.rewiew{
+	display: flex;
+	flex-wrap: wrap;
+	margin: 50px;
+	align-items: center;
+	justify-content: space-evenly;
+	flex-direction: column;
+	
+}
+
+.rewiewTitle{
+	align-self: center;
+	font-weight: 200;
+	margin: 10px;
+	color: rgb(98, 192, 144);
+	background-color: black;
+	width: auto;
+	background-size: 100%;
+	
+}
 /********************************************MOVIES*******************************************/
 
 .movies{
@@ -246,8 +324,8 @@ div.actors img{
 }
 
 .film img:hover{
-	width: 150px;
-	height: 150px;
+	width: 120px;
+	height: 120px;
 	image-rendering: auto;
 	border-radius: 100px;
 	transition: .2s;
@@ -259,7 +337,7 @@ div.actors img{
 	flex-wrap: wrap;
 	display: flex;
 	flex-direction: row;
-	margin: 10px;
+	margin: 20px;
 	list-style: none;
 	width: 30%;
 	height: 150px;
@@ -275,7 +353,7 @@ div.actors img{
 
 .filmTitle:hover{
 	text-decoration: none;
-	color: lightgreen;
+	color: rgb(98, 192, 144);
 	transition: .2s;
 }
 
@@ -297,8 +375,8 @@ div.actors img{
 }
 
 .artists img:hover{
-	width: 150px;
-	height: 150px;
+	width: 120px;
+	height: 120px;
 	image-rendering: auto;
 	border-radius: 100px;
 	transition: .2s;
@@ -323,5 +401,28 @@ div.actors img{
 
 .artistTitle:hover{
 	text-decoration: none;
-	color: lightgreen;
+	color: rgb(98, 192, 144);
+}
+
+
+.listDirectors{
+	color: white;
+	margin: 0px;
+	flex-wrap: wrap;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	flex-direction: row;
+	width: 100%;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;	
+	background-color: rgb(63, 63, 63);
+}
+
+.listDirectors img{
+	margin: 30px;
+}
+
+h1{
+	margin-bottom: 0px;
 }

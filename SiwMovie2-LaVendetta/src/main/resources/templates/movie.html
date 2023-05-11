@@ -25,11 +25,11 @@
 			<li><a href="/formSearchMovies">Cerca Film</a></li>
 		</ul>
 	</nav>
-
+	<center>
+		<img class="logo" src="/images/logo-siw.png" width="30%"/>
+	</center>
 	<div class="movie">
-		<center>
-			<p><img class="logo" src="/images/logo-siw.png" width="30%"/></p>
-		</center>
+
 		
 	    <div th:if="${movie}">
 	        <h1 th:text="${movie.title}">Up!</h1>
@@ -38,29 +38,36 @@
 	    </div>
 	    
 	    <div class="actors">
-			<h2>Regista</h2>
-			<div th:if="${movie.director == null}">Nessun Regista</div>
-	    	
-	    	<div th:if="${movie.director}">
-	        	<img th:src="${movie.director.urlOfPicture}"/>
-	        	<span th:text="${movie.director.name} + ' ' + ${movie.director.surname}">Steven Spielberg</span>
-	    	</div>
-	    
-	    </div>
-	    
-	    <div class="actors" >
-	    	<div th:if="${movie.actors}">
+			
+			<div class="listDirector">
+				<h2 class="regista">Regista</h2>
+	    		<div th:if="${movie.director == null}">NESSUN REGISTA</div>
+	    		<div class="listDirector" th:if="${movie.director}">
+	        		<img th:src="${movie.director.urlOfPicture}"/>
+	    		</div>
+			</div>
+			
+	    	<div class="listActors">
 				<h2>Attori</h2>
-				<div th:if="${movie.actors.isEmpty()} ">Nessun attore</div>
+				<div th:if="${movie.actors.isEmpty()} ">NESSUN AUTORE</div>
 				<div th:each="actor: ${movie.actors}">
 					<img th:src="${actor.urlOfPicture}"/>
-					<span th:text="${actor.name} + ' ' + ${actor.surname}">Al Pacino</span>
 				</div>
 			</div>
    	
    		</div>
    		
    	</div>
+	   
+	   <div class="rewiew">
+		<h3 class="rewiewTitle">Recensioni Utenti</h2>
+			<div><a href="/formNewRewiew">Scrivi un recensione</a></div>
+			<div th:if="${movie.movieRewiews.isEmpty()}">NESSUNA RECENSIONE</div>
+			<div th:each="rewiew: ${movie.movieRewiews}">
+				<p th:text="${rewiew.title} + ' ' + ${rewiew.rating}"></p>
+				<p th:text="${rewiew.description}"></p>
+			</div>
+		</div>
    	
   </body>
   

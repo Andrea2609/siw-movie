@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -26,6 +27,31 @@ public class Rewiew {
 	
 	
 	private String description;
+
+	@ManyToOne
+	private User user;
+
+	@ManyToOne
+	private Movie movie;
+
+	public Movie getMovie() {
+        return movie;
+    }
+
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
+
+
+    public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 
 	public Long getId() {

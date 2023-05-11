@@ -25,15 +25,40 @@
 			<li><a href="/formSearchMovies">Cerca Film</a></li>
 		</ul>
 	</nav>
+	<center>
+		<img class="logo" src="/images/logo-siw.png" width="30%"/>
+	</center>
+	<div class="movie">
+		
+		<div th:if="${artist}">
+			<h1 th:text="${artist.name} + ' ' +${artist.surname} ">Up!</h1>
+			<h4 th:text="${artist.dateOfBirth}">2000</h4>
+			<img class="filmImage" th:src=${artist.urlOfPicture} />
+		</div>
 
-	<div><a href="/"><img src="/images/logo-siw.png" width="50%"/></a></div>
-    <h1>Dettagli Artista</h1>
-    <div class="artist" th:if="${artist}">
-        <p th:text="'Nome: ' + ${artist.name}">Dino Risi</p>
-        <p th:text="'Cognome: ' + ${artist.surname}">Dino Risi</p>
-        <p th:text="'Data di nascita: ' + ${artist.dateOfBirth}">20/20/2000</p>
-        <span><img th:src=${artist.urlOfPicture} /></span>
-    </div>
-    <div th:unless="${artist}">Non esiste</div>
+		<div class="actors" >
+			
+			<div class="listDirectors">
+				
+				<h2 class="regista">Regista in</h2>
+				<div th:if="${artist.getDirectorOf().isEmpty()} ">ANCORA NESSUN FILM</div>
+				<div class="" th:each="movie: ${artist.getDirectorOf()}">
+					<img th:src="${movie.urlImage}"/>
+				</div>
+			</div>
+
+	    	<div class="listActors">
+				<h2>Recitato in</h2>
+				<div th:if="${artist.getActorOf().isEmpty()} ">ANCORA NESSUN FILM</div>
+				<div class="" th:each="movie: ${artist.getActorOf()}">
+					<img th:src="${movie.urlImage}"/>
+				</div>
+			</div>
+
+
+   		</div>
+
+	</div>
+
   </body>
 </html>

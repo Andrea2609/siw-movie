@@ -29,7 +29,7 @@ public class ArtistController {
 	}
 	
 	@PostMapping("/admin/artist")
-	public String newArtist(@ModelAttribute("artist") Artist artist, Model model) {
+	public String newArtist(@ModelAttribute Artist artist, Model model) {
 		if (!artistRepository.existsByNameAndSurname(artist.getName(), artist.getSurname())) {
 			this.artistRepository.save(artist); 
 			model.addAttribute("artist", artist);
@@ -41,7 +41,7 @@ public class ArtistController {
 	}
 
 	@GetMapping("/artist/{id}")
-	public String getArtist(@PathVariable("id") Long id, Model model) {
+	public String getArtist(@PathVariable Long id, Model model) {
 		model.addAttribute("artist", this.artistRepository.findById(id).get());
 		return "artist.html";
 	}

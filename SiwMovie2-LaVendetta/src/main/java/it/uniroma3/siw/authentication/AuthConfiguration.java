@@ -72,7 +72,7 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 	/**
 	 * Questo metodo definisce le query SQL per ottenere username e password
 	 */
-	@Override
+	/*~~(Migrate manually based on https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter)~~>*/@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication()
 		.dataSource(this.datasource)

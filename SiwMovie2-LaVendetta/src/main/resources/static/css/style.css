@@ -6,14 +6,14 @@ body{
 	align-items: center;
 	min-height: 100vh;
 	font-family: 'Jost', sans-serif;
-	background: linear-gradient(to bottom, rgb(128, 128, 128), rgb(128, 255, 128), rgb(0, 128, 0));
+	background: linear-gradient(to bottom, rgb(218, 218, 218), rgb(121, 121, 121), rgb(61, 61, 61));
 }
 .main{
 	width: 350px;
 	height: 500px;
 	background: red;
 	overflow: hidden;
-	background: lightgreen no-repeat center/ cover;
+	background: rgb(0, 0, 0) no-repeat center/ cover;
 	border-radius: 10px;
 	box-shadow: 5px 20px 50px #000;
 }
@@ -38,7 +38,7 @@ label{
 }
 
 label.signup1{
-	color: #573b8a;
+	color:rgb(98, 192, 144) ;
 	font-size: 1.8em;
 	justify-content: center;
 	display: flex;
@@ -67,7 +67,7 @@ button{
 	justify-content: center;
 	display: block;
 	color: #fff;
-	background: rgb(0, 255, 0);
+	background:rgb(98, 192, 144) ;
 	font-size: 1em;
 	font-weight: bold;
 	margin-top: 20px;
@@ -86,7 +86,7 @@ button:hover{
 	height: 100%;
 }
 .login label{
-	color: #573b8a;
+	color:rgb(98, 192, 144) ;
 	transform: scale(.6);
 }
 

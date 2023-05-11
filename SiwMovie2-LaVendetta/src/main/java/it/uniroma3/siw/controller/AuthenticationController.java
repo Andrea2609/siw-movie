@@ -74,9 +74,9 @@ public class AuthenticationController {
     }
 
 	@PostMapping(value = { "/register" })
-    public String registerUser(@Valid @ModelAttribute("user") User user,
+    public String registerUser(@Valid @ModelAttribute User user,
                  BindingResult userBindingResult, @Valid
-                 @ModelAttribute("credentials") Credentials credentials,
+            @ModelAttribute Credentials credentials,
                  BindingResult credentialsBindingResult,
                  Model model) {
 

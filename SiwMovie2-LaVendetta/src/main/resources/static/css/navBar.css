@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+*{
+	margin: 0px;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+}
+
+body{
+	/*background: url(../images/sfondo.jpg) no-repeat;*/
+	background-position: center;
+	background-size: cover;
+}
+
+.header{
+	width: 100%;
+	padding: 20px 10%; 
+	display: flex;
+	background: transparent;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 100;
+}
+
+.logo{
+	width: 40%;
+}
+
+.navbar a{
+	font-size: 18px;
+	color: #ededed;
+	text-decoration: none;
+	font-weight: 500;
+	margin-left: 35px;
+	transition: .3s;
+}
+
+.navbar a:hover,
+.navbar a.active
+{
+	color: rgb(98, 192, 144);
+}
+
+.home{
+	
+	min-height: 90vh;
+	display: flex;
+	align-items: center;
+	padding: 0 10%;
+	justify-content: space-between;
+}
+
+.home-content{
+	max-width: 600px;
+}
+
+.home-content h1{
+	
+	font-size: 56px;
+	font-weight: 700;
+	color: #ededed;
+}
+
+.home-content .btn-box{
+	display: flex;
+	justify-content: space-between;
+	width: 345px;
+	height: 50px;
+}
+
+.btn-box a{
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	width: 150px;
+	height: 100%;
+	background: rgb(98, 192, 144);
+	border: 2px solid #ededed;
+	border-radius: 8px;
+	font-size: 19px;
+	color: #ededed;
+	text-decoration: none;
+	font-weight: 600;
+	letter-spacing: 1px;
+	transition: .2s;
+}
+
+.btn-box a:hover{
+	border: 2px solid rgb(98, 192, 144);
+	color: rgb(98, 192, 144);
+	background-color: #ededed;
+}
+
+span{
+	color: rgb(98, 192, 144);
+	margin-left: 35px;
+	font-size: 18px;
+}

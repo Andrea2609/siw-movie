@@ -3,31 +3,23 @@
   <head>
     <title>Artista</title>
 	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/navBar.css"/>
 	<script src="https://kit.fontawesome.com/911a8faad0.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-	<nav>
-		<ul class="menu">
-			<li>
-				<a href="/"><i class="fa-solid fa-house"></i></a>
-			</li>
-			<li th:if="${#request.userPrincipal}"> 
-				<span th:text="'ciao ' + ${#request.userPrincipal.principal.username}"></span> 
-			</li>
-			<li th:if="${#request.userPrincipal}"> 
-				<a class="" href="/logout">Logout</a>
-			</li>
-			
-			<li th:unless="${#request.userPrincipal}">
-				<a class="" href="/login">Login/Register</a>
-			</li>
-			<li><a href="/formSearchMovies">Cerca Film</a></li>
-		</ul>
-	</nav>
-	<center>
-		<img class="logo" src="/images/logo-siw.png" width="30%"/>
-	</center>
+	<header class="header">
+		<a href="/" class="logo"><img class="logo" src="/images/logo-siw.png" /></a>
+		<nav class="navbar">
+			<a href="/" class="active"><i class="fa-solid fa-house"></i></a>
+			<a href="">Cerca Film</a>
+			<a href="">Cerca Artista</a>
+			<span th:if="${#request.userPrincipal}" th:text="'Ciao ' + ${#request.userPrincipal.principal.username}"></span>
+			<a th:if="${#request.userPrincipal}" class="" href="/logout">Logout</a>
+			<a th:unless="${#request.userPrincipal}" class="" href="/login">Login/Register</a>
+		</nav>
+	</header>
+
 	<div class="movie">
 		
 		<div th:if="${artist}">
@@ -36,27 +28,55 @@
 			<img class="filmImage" th:src=${artist.urlOfPicture} />
 		</div>
 
-		<div class="actors" >
-			
-			<div class="listDirectors">
-				
-				<h2 class="regista">Regista in</h2>
-				<div th:if="${artist.getDirectorOf().isEmpty()} ">ANCORA NESSUN FILM</div>
-				<div class="" th:each="movie: ${artist.getDirectorOf()}">
-					<img th:src="${movie.urlImage}"/>
-				</div>
-			</div>
+		
+		<table class="table-ext-regista-attore">
+			<thead>
+				  <tr>
+					  <th>Attore</th>
+				</tr>		
+			</thead>
+		  
+		  <tbody>
+			  <tr>	
+			  <td colspan="2">	
+				  <div class="divinterno" >	
+					<center><div class="noFilm" th:if="${artist.getActorOf().isEmpty()} ">ANCORA NESSUN FILM</div></center>	
+					  <table class="table-int" th:each="movie : ${artist.getActorOf()}">
+						  <tr>
+							  <td><a th:href="@{'/movie' + '/' + ${movie.id}}" ><img class="tableImage" th:src="${movie.urlImage}"/></a></td>
+							  <td><a th:href="@{'/movie' + '/' + ${movie.id}}" th:text="${movie.title}"></a></td>
+						  </tr>	
+					   </table>
+				  </div>
+			  </td>
+			 </tr> 
+		  </tbody>
+		  </table>
 
-	    	<div class="listActors">
-				<h2>Recitato in</h2>
-				<div th:if="${artist.getActorOf().isEmpty()} ">ANCORA NESSUN FILM</div>
-				<div class="" th:each="movie: ${artist.getActorOf()}">
-					<img th:src="${movie.urlImage}"/>
-				</div>
-			</div>
-
-
-   		</div>
+		  <table class="table-ext-regista-attore">
+			<thead>
+				  <tr>
+					  <th>Regista</th>
+				</tr>		
+			</thead>
+		  
+		  <tbody>
+			  <tr>	
+			  <td colspan="2">	
+				  <div class="divinterno" >	
+					<center><div class="noFilm" th:if="${artist.getDirectorOf().isEmpty()} ">ANCORA NESSUN FILM</div></center>
+					  <table class="table-int" th:each="movie : ${artist.getDirectorOf()}">
+						  <tr>
+							  <td><a th:href="@{'/movie' + '/' + ${movie.id}}" ><img class="tableImage" th:src="${movie.urlImage}"/></a></td>
+							  <td><a th:href="@{'/movie' + '/' + ${movie.id}}" th:text="${movie.title}"></a></td>
+						  </tr>	
+					   </table>
+				  </div>
+			  </td>
+			 </tr> 
+		  </tbody>
+		  </table>
+		
 
 	</div>
 

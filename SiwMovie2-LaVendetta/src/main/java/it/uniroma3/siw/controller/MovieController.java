@@ -154,6 +154,15 @@ public class MovieController {
 	
 	@GetMapping("/movie/{id}")
 	public String getMovie(@PathVariable Long id, Model model) {
+		model.addAttribute("rewiew", new Rewiew());
+		model.addAttribute("movie", this.movieRepository.findById(id).get());
+		return "movie.html";
+	}
+
+	@PostMapping("/movie/{id}")
+	public String newRewiew(@PathVariable Long id ,@ModelAttribute Rewiew rewiew, Model model) {
+		this.rewiewRepository.save(rewiew); 
+		model.addAttribute("rewiew", rewiew);
 		model.addAttribute("movie", this.movieRepository.findById(id).get());
 		return "movie.html";
 	}
@@ -170,24 +179,17 @@ public class MovieController {
 		return "formSearchMovies.html";
 	}
 
-	@PostMapping("/searchMovies")
-	public String searchMovies(Model model, @RequestParam int year) {
+	@PostMapping("/foundMoviesByYear")
+	public String searchMoviesByYear(Model model, @RequestParam int year) {
 		model.addAttribute("movies", this.movieRepository.findByYear(year));
 		return "foundMovies.html";
 	}
-	
-	@GetMapping("/formNewRewiew")
-	public String formNewRewiew(Model model){
-		model.addAttribute("rewiew", new Rewiew());
-		return "formNewRewiew.html";
+
+	@PostMapping("/foundMoviesByTitle")
+	public String searchMoviesByTitle(Model model, @RequestParam String title) {
+		model.addAttribute("movies", this.movieRepository.findByTitle(title));
+		return "foundMovies.html";
 	}
-
-	@PostMapping("/movie")
-	public String newRewiew(@ModelAttribute Rewiew rewiew, Model model) {
-
-			this.rewiewRepository.save(rewiew); 
-			model.addAttribute("rewiew", rewiew);
-			return "movies.html";
-		}
+	
 	
 }

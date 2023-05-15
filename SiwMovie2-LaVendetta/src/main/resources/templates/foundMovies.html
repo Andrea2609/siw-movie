@@ -12,24 +12,43 @@
 	<header class="header">
 		<a href="/" class="logo"><img class="logo" src="/images/logo-siw.png" /></a>
 		<nav class="navbar">
-			<a href="" class="active"><i class="fa-solid fa-house"></i></a>
-			<a href="">Cerca Film</a>
+			<a href="/" class="active"><i class="fa-solid fa-house"></i></a>
+			<a href="/formSearchMovies">Cerca Film</a>
 			<a href="">Cerca Artista</a>
 			<span th:if="${#request.userPrincipal}" th:text="'Ciao ' + ${#request.userPrincipal.principal.username}"></span>
 			<a th:if="${#request.userPrincipal}" class="" href="/logout">Logout</a>
 			<a th:unless="${#request.userPrincipal}" class="" href="/login">Login/Register</a>
 		</nav>
 	</header>
-
-	<div><a href="/"><img src="/images/logo-siw.png" width="50%"/></a></div>
-	<h1>Film che soddisfano i requisiti</h1>
-	<div th:if="${movies.isEmpty()}">Non ci sono film che soddisfano i requisiti</div>
-	<ul th:if="${!movies.isEmpty()}">
-		<li th:each="movie : ${movies}">
-			<a href="movie.html" th:href="@{'/movie' + '/' + ${movie.id}}"
-				th:text="${movie.title} + ' (' + ${movie.year}+')'">Up! (2000)</a>
-		</li>
-	</ul>
+	
+	<div class="foundMovies">
+	<table class="table-ext">
+		
+		<thead>
+			  <tr>
+				  <th>Immagine</th>
+				  <th>Titolo</th> 
+			</tr>		
+		</thead>
+	  
+	  <tbody>
+		
+		  <tr>	
+		  <td colspan="2">	
+			  <div class="divinterno-foundMovies" >	
+				<center><div style="color: #ffffff;" th:if="${movies.isEmpty()}">Non ci sono film che soddisfano i requisiti</div></center>	
+				  <table class="table-int" th:each="movie : ${movies}">
+					  <tr>
+						  <td><a th:href="@{'/movie' + '/' + ${movie.id}}" ><img class="tableImage" th:src="${movie.urlImage}"/></a></td>
+						  <td><a th:href="@{'/movie' + '/' + ${movie.id}}" th:text="${movie.title}"></a></td>
+					  </tr>	
+				   </table>
+			  </div>
+		  </td>
+		 </tr> 
+	  </tbody>
+	  </table>
+	</div>
 </body>
 
 </html>

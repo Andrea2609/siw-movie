@@ -1,8 +1,7 @@
 body{
-	background: url(../images/sfondo.jpg) no-repeat;
-	background-position: center;
+	background: url(../images/sfondo.jpg) ;
 	background-size: cover;
-	margin-bottom: 100px;
+	background-position: center;
 }
 
 
@@ -425,11 +424,18 @@ h1{
 
 
 .divinterno{
-height:600px; 
+height:640px; 
 overflow: auto;
 width:100%;
 
 }
+
+.divinterno-rewiew{
+	height:300px; 
+	overflow: auto;
+	width:100%;
+	margin-bottom: 20px;
+}	
 
 .table-int {
 width:100%; 
@@ -487,3 +493,218 @@ text-align: center;
 	align-self: center;
 }
 
+.rewiew .fa-solid {
+	margin: 10px;
+	color: #a17f11da;
+}
+
+/************************************SEARCH-MOVIES*********************************************/
+
+.search{
+	margin-top: 200px;
+	display: flex;
+	background-color: transparent;
+	justify-content: space-evenly;
+}
+
+.search form{
+	border-radius: 10px;
+	align-self: flex-end;
+	padding: 10px;
+	background-color: #494949c2;
+}
+
+.search input{
+	width: 80%;
+	
+}
+
+/************************************FOUND-MOVIES*********************************************/
+
+.foundMovies{
+	margin-top: 200px;
+	display: flex;
+	flex-direction: column;
+	background-color: transparent;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.divinterno-foundMovies{
+	height: 300px;
+	overflow: auto;
+	width:100%;
+}
+
+
+/************************************INDEX-MOVIE*********************************************/
+
+.indexMovie{	
+	display: flex;
+	flex-direction: column;
+	min-height: 50vh;
+	align-items: center;
+	justify-content: center;
+	padding: 0 6%;
+}
+
+.indexMovie h1{
+	margin: 20px;
+}
+
+.indexMovie .btn-box{
+	height: 50px;
+	display: flex;
+	justify-content: space-around;
+	width: 60%;
+	align-self: center;
+}
+
+.indexMovie .btn-box a{
+	height: 100%;
+	width: 30%;
+	align-self: center;
+}
+
+/************************************INDEX-ARTIST*********************************************/
+
+.indexArtist{	
+	display: flex;
+	flex-direction: column;
+	min-height: 50vh;
+	align-items: center;
+	justify-content: center;
+	padding: 0 6%;
+}
+
+.indexArtist h1{
+	margin: 20px;
+}
+
+.indexArtist .btn-box{
+	height: 50px;
+	display: flex;
+	justify-content: space-around;
+	width: 60%;
+	align-self: center;
+}
+
+.indexArtist .btn-box a{
+	height: 100%;
+	width: 30%;
+	align-self: center;
+}
+
+/************************************FORM-NEW-MOVIE*********************************************/
+
+.formNewMovie{	
+	display: flex;
+	flex-direction: column;
+	min-height: 50vh;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 0 6%;
+}
+
+.formNewMovie h1{
+	background:rgba(255, 0, 0, 0.281) ;
+	width: 397px;
+
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	margin: 10px;
+	text-align: center;
+}
+
+.formNewMovie form{
+		min-height: 245px;
+		background-color: #494949c2;
+		border-radius: 5px;
+		border-top-left-radius: 0px;
+		border-top-right-radius: 0px;
+		width: 397px;
+}
+
+.formNewMovie div{
+	color: #ddd;
+}
+
+.formNewMovie-btn{
+	height: 41px;
+	display: flex;
+	justify-content: flex-start;
+}
+
+.formNewMovie-btn button{
+	font-size: large;
+	font-weight: bold;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	transition: .3s;
+	border-radius: 5px;
+}
+
+.formNewMovie-btn button:hover{
+	background-color:rgba(255, 0, 0, 0.466) ;
+	cursor: pointer;
+}
+
+/************************************MANAGE-MOVIES*********************************************/
+
+.manageMovies{
+	margin-top: 50px;
+	display: flex;
+	justify-content: center;
+}
+
+.table-ext-manageMovies {
+	width:50%;
+	background-color: #4949495d;
+	position: relative;
+}
+
+.table-int-manageMovies td {
+	height:40px;
+	line-height:100px;
+	width: 33%;
+	border-bottom: 2px solid black;
+	text-align: center;
+}
+
+.table-ext-manageMovies thead th{
+	height:60px;
+	line-height:50px;
+	text-align: center;
+	padding: 0 0 0 5px;
+	background: rgba(255, 0, 0, 0.281);
+	color:#fff;
+	width: 33%;
+}
+
+
+.divinterno-manageMovies{
+height:570px; 
+overflow: auto;
+width:100%;
+
+}
+
+.table-int-manageMovies{
+	width: 100%;
+}
+
+.table-int-manageMovies td a{
+	font-size: large;
+	color: rgb(255, 255, 255);
+	text-decoration: none;
+	transition: .3s;
+}
+
+.table-int-manageMovies td a:hover{
+	color: rgb(98, 192, 144);
+	text-decoration: none;
+}

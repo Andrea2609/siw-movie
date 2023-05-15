@@ -1,55 +1,12 @@
-body { 
-	margin: 0px;
-    font-family: Arial, Helvetica, sans-serif;
-	min-height: 100vh;
-	width: 100%;
-    background:rgb(97, 97, 97);
-}
 
-nav{
-	width: 100%;
-	padding: 0px;
-	background:rgb(98, 192, 144) ;
-	font-weight: bold;
-}
-
-.menu{
-	list-style: none;
-	margin-top: 0px;
-	padding: 0px;
-}
-
-.menu li{
-	display: inline-block;
-	text-transform: capitalize;
-	font-size: 20px;
-}
-
-.menu li a{
-	font-size: 20px;
-	text-decoration: none;
-}
-
-.menu li span{
-	padding: 15px 30px;
-}
-.menu a{
-	color: #000;
-	display: grid ;
-	justify-content: end;
-	padding: 15px 30px;
-	text-transform: none;
-	transition: .3s;
-}
 #feedback {
 	max-width: 30%;
 	width: 100%;
-	margin: 10px auto;
+	margin: 20px;
 	padding: 20px;
-	border: solid 1px #f1f1f1;
-	background: #fbfbfb;
-	box-shadow: #e6e6e6 0 0 4px ;
+	background: #494949e1;
 	border-radius: 0.25rem;
+	height: 400px;
   }
   
   @media (max-width: 720px) {
@@ -93,10 +50,11 @@ nav{
   }
   
   .pinfo {
-   margin: 8px auto;
-   font-weight: bold;
-   line-height: 1.5;
-   color: #0d0d0d;
+	font-size: large;
+	margin: 8px auto;
+	font-weight: bolder;
+	line-height: 1.5;
+	color: #0d0d0d;
   }
   .form-group {
 	margin-bottom: 1rem;
@@ -291,6 +249,7 @@ nav{
   .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > .btn {
 	border-bottom-left-radius: 0;
 	border-top-left-radius: 0;
+	margin: 0px;
   }
   
   .form-control + .input-group-addon:not(:first-child) {
@@ -342,6 +301,7 @@ nav{
   }
   
   .btn-primary {
+	margin-top: 20px;
 	color: #fff;
 	background-color: #0275d8;
 	border-color: #0275d8;
@@ -369,5 +329,9 @@ nav{
 	background-color: #025aa5;
 	background-image: none;
 	border-color: #01549b;
+  }
+
+  textarea{
+	min-height: 77px;
   }
   

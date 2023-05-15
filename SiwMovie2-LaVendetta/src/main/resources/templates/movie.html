@@ -4,6 +4,7 @@
     <title>Movie</title>
 	<link rel="stylesheet" href="/css/navBar.css"/>
 	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/formStile.css" />
 	<script src="https://kit.fontawesome.com/911a8faad0.js" crossorigin="anonymous"></script>
 </head>
 
@@ -78,7 +79,7 @@
 		</table>
 	</div>
 
-	<center>
+	<div class="movie">
 		<table class="rewiew">
 			<thead>
 				<th>Titolo</th>		
@@ -89,14 +90,13 @@
 		<tbody>
 			<tr>	
 				<td colspan="3">	
-					<div class="divinterno" >	
+					<div class="divinterno-rewiew" >	
 						<center><div class="noFilm" th:if="${movie.movieRewiews.isEmpty()}">NESSUNA RECENSIONE</div></center>	
 						<table class="table-int" th:each="rewiew: ${movie.movieRewiews}">
 							<tr>
 								<td><span th:text="${rewiew.title}"></span></td>
-								<td><span th:text="${rewiew.rating}"></span></td>
-								<td th:text="${rewiew.description}"></td>
-								
+								<td><span th:text="${rewiew.rating}"></span><i class="fa-solid fa-star"></i></td>
+								<td><span th:text="${rewiew.description}"></span></td>
 							</tr>	
 						</table>
 					</div>
@@ -104,7 +104,55 @@
 			</tr> 
 		</tbody>
 		</table>
-	</center>
+
+		<form th:if="${#request.userPrincipal}" id="feedback" th:action="@{'/movie' + '/' + ${movie.id}}" method="POST" th:object="${rewiew}">
+		
+			<div class="pinfo">Titolo</div>
+			
+			<div class="form-group">
+			  <div class="col-md-4 inputGroupContainer">
+			  <div class="input-group">
+				<span class="input-group-addon"><i class="fa-regular fa-star"></i></span>
+			  <input required name="title" class="form-control"  type="text" th:field="${rewiew.title}" >
+				</div>
+			  </div>
+			</div>
+			
+			 <div class="pinfo">Valuta il film</div>
+			  
+			
+			<div class="form-group">
+			  <div class="col-md-4 inputGroupContainer">
+			  <div class="input-group">
+			  <span class="input-group-addon"><i class="fa-regular fa-star"></i></span>
+			   <select class="form-control" id="rate" name="rating" type="int" th:field="${rewiew.rating}">
+				  <option value="1">1</option>
+				  <option value="2">2</option>
+				  <option value="3">3</option>
+				  <option value="4">4</option>
+				  <option value="5">5</option>
+				</select>
+				</div>
+			  </div>
+			</div>
+			
+			 <div class="pinfo">Descrizione</div>
+			  
+			
+			<div class="form-group">
+			  <div class="col-md-4 inputGroupContainer">
+				  <div class="input-group">
+					  <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+					  <textarea class="form-control" id="review" rows="3" th:field="${rewiew.description}"></textarea>
+				  </div>
+			  </div>
+			</div>
+			
+			 <button type="submit" class="btn btn-primary">Invia Recensione</button>
+			
+			
+		</form>
+	</div>
   </body>
   
 </html>

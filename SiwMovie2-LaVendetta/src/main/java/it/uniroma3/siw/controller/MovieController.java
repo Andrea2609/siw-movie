@@ -24,9 +24,12 @@ import it.uniroma3.siw.repository.ArtistRepository;
 import it.uniroma3.siw.repository.MovieRepository;
 import it.uniroma3.siw.repository.RewiewRepository;
 import it.uniroma3.siw.service.CredentialsService;
+import it.uniroma3.siw.service.MovieService;
 
 @Controller
 public class MovieController {
+	@Autowired
+	private MovieService movieService;
 	@Autowired
 	private RewiewRepository rewiewRepository;
 
@@ -67,13 +70,11 @@ public class MovieController {
 	}
 	
 	@GetMapping(value="/admin/setDirectorToMovie/{directorId}/{movieId}")
-	public String setDirectorToMovie(@PathVariable Long directorId, @PathVariable Long movieId, Model model) {
-		
+	public String setDirectorToMovie(@PathVariable("directorId") Long directorId, @PathVariable ("movieId") Long movieId, Model model) {
 		Artist director = this.artistRepository.findById(directorId).get();
 		Movie movie = this.movieRepository.findById(movieId).get();
 		movie.setDirector(director);
 		this.movieRepository.save(movie);
-		
 		model.addAttribute("movie", movie);
 		return "admin/formUpdateMovie.html";
 	}
@@ -169,7 +170,6 @@ public class MovieController {
 
 	@GetMapping("/movie")
 	public String getMovies(Model model) {
-
 		model.addAttribute("movies", this.movieRepository.findAll());
 		return "movies.html";
 	}

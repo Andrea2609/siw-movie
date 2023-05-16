@@ -4,7 +4,6 @@ body{
 	background-position: center;
 }
 
-
 .menu{
 	list-style: none;
 	margin-top: 0px;
@@ -707,4 +706,13 @@ width:100%;
 .table-int-manageMovies td a:hover{
 	color: rgb(98, 192, 144);
 	text-decoration: none;
+}
+
+/************************************FORM-UPDATE-MOVIES*********************************************/
+
+.formUpdateMovie{
+	display: flex;
+	color: #ddd;
+	flex-direction: column;
+	margin-left: 20px;
 }

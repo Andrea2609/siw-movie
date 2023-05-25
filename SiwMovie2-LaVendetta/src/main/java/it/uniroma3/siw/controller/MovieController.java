@@ -7,6 +7,9 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.controller.validator.MovieValidator;
 import it.uniroma3.siw.model.Artist;
+import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Movie;
 import it.uniroma3.siw.model.Rewiew;
+import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.repository.ArtistRepository;
 import it.uniroma3.siw.repository.MovieRepository;
 import it.uniroma3.siw.repository.RewiewRepository;
@@ -61,6 +66,22 @@ public class MovieController {
 	@GetMapping(value="/admin/indexMovie")
 	public String indexMovie() {
 		return "admin/indexMovie.html";
+	}
+
+	@GetMapping(value = "/admin/removeMovie/{movieId}")
+	public String removeArtist(@PathVariable Long movieId) {
+		Movie toBeDeleted = this.movieRepository.findById(movieId).get();
+		
+		for(Artist artist : toBeDeleted.getActors()){
+			artist.getActorOf().remove(toBeDeleted);
+			artistRepository.saveAndFlush(artist);
+		}
+
+		toBeDeleted.setDirector(null);
+		this.movieRepository.saveAndFlush(toBeDeleted);
+		this.movieRepository.deleteById(movieId);
+		
+		return "redirect:/admin/manageMovies";
 	}
 	
 	@GetMapping(value="/admin/manageMovies")
@@ -160,9 +181,17 @@ public class MovieController {
 		return "movie.html";
 	}
 
-	@PostMapping("/movie/{id}")
+	@PostMapping("/addRewiew/{id}")
 	public String newRewiew(@PathVariable Long id ,@ModelAttribute Rewiew rewiew, Model model) {
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+		User currentUser = credentials.getUser();
+		Movie movie = movieRepository.findById(id).get();
+		
+		rewiew.setMovie(movie);
+		rewiew.setUser(currentUser);
 		this.rewiewRepository.save(rewiew); 
+
 		model.addAttribute("rewiew", rewiew);
 		model.addAttribute("movie", this.movieRepository.findById(id).get());
 		return "movie.html";

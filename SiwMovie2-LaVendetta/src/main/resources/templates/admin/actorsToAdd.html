@@ -4,50 +4,75 @@
 <head>
 	<title>Scelta attori</title>
 	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/navBar.css"/>
 	<script src="https://kit.fontawesome.com/911a8faad0.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-	<nav>
-		<ul class="menu">
-			<li>
-				<a href="/"><i class="fa-solid fa-house"></i></a>
-			</li>
-			<li th:if="${#request.userPrincipal}"> 
-				<span th:text="'ciao ' + ${#request.userPrincipal.principal.username}"></span> 
-			</li>
-			<li th:if="${#request.userPrincipal}"> 
-				<a class="" href="/logout">Logout</a>
-			</li>
-			
-			<li th:unless="${#request.userPrincipal}">
-				<a class="" href="/login">Login/Register</a>
-			</li>
-			<li><a href="/formSearchMovies">Cerca Film</a></li>
-		</ul>
-	</nav>
+	<header class="header">
+		<a href="/" class="logo"><img class="logo" src="/images/logo-siw.png" /></a>
+		<nav class="navbar">
+			<a href="/" class="active"><i class="fa-solid fa-house"></i></a>
+			<a href="/formSearchMovies">Cerca Film</a>
+			<a href="">Cerca Artista</a>
+			<span th:if="${#request.userPrincipal}" th:text="'Ciao ' + ${#request.userPrincipal.principal.username}"></span>
+			<a th:if="${#request.userPrincipal}" class="" href="/logout">Logout</a>
+			<a th:unless="${#request.userPrincipal}" class="" href="/login">Login/Register</a>
+		</nav>
+	</header>
+
 	
-	<div><a href="/"><img src="/images/logo-siw.png" width="50%"/></a></div>
-	<h1 th:text="'Attori del film ' + ${movie.title}"></h1>
-	<div th:if="${movie.actors.isEmpty()}">Non ci sono attori per questo film</div>
-	<ul>
-		<li th:each="actor : ${movie.actors}">
-			<span th:text="${actor.name}+' '+${actor.surname}"></span>
-			<a th:href="@{'/admin/removeActorFromMovie/'+ ${actor.id}+'/'+${movie.id}}">Cancella</a>
-		</li>
-	</ul>
-	<div>
-		Attori che si possono aggiungere:
-		<ul>
-			<li th:each="actor : ${actorsToAdd}">
-				<span th:text="${actor.name}+' '+${actor.surname}"></span>
-				<a th:href="@{'/admin/addActorToMovie/'+ ${actor.id}+'/'+${movie.id}}">Aggiungi</a>
-			</li>
-		</ul>
-	<div>
-	<div>
-		<a th:href="@{'/admin/formUpdateMovie/'+ ${movie.id}}"><button type="button">Fine</button></a>
+	
+	<div class="actorsToAdd">
+		
+		
+		
+		<table class="table-ext-regista-attore">
+			<thead><tr><th><h2 th:text="'Attori del film ' + ${movie.title}"></h2></th></tr></thead>
+		  	<tbody>
+			  <tr>	
+			  	<td colspan="2">	
+				  	<div class="divinterno">	
+						<center><div th:if="${movie.actors.isEmpty()}">Non ci sono attori per questo film</div></center>	
+					  	<table class="table-int" th:each="actor : ${movie.actors}">
+						  	<tr>
+								<td><a th:text="${actor.name}+' '+${actor.surname}"></a></td>
+							  	<td><a th:href="@{'/admin/removeActorFromMovie/'+ ${actor.id}+'/'+${movie.id}}">Cancella</a></td>
+								
+						  	</tr>	
+					   	</table>
+				  	</div>
+				</td>
+				</tr> 
+		  </tbody>
+		</table>
+
+
+			<a th:href="@{'/admin/formUpdateMovie/'+ ${movie.id}}"><button type="button">Fine</button></a>
+
+
+		<table class="table-ext-regista-attore">
+			<thead><tr><th><h2>Attori che si possono aggiungere</h2></th></tr></thead>
+		  	<tbody>
+			  <tr>	
+			  	<td colspan="2">	
+				  	<div class="divinterno">	
+						<!--<center><div th:if="${movie.actors.isEmpty()}">Non ci sono attori per questo film</div></center>-->
+					  	<table class="table-int" th:each="actor : ${actorsToAdd}">
+						  	<tr>
+								<td><a th:text="${actor.name}+' '+${actor.surname}"></a></td>
+							  	<td><a th:href="@{'/admin/addActorToMovie/'+ ${actor.id}+'/'+${movie.id}}">Aggiungi</a></td>
+								
+						  	</tr>	
+					   	</table>
+				  	</div>
+				</td>
+				</tr> 
+		  </tbody>
+		</table>
+		
 	</div>
+		
 </body>
 
 </html>

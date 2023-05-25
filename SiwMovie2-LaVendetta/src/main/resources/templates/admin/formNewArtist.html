@@ -6,56 +6,49 @@
 		New Artist
 	</title>
 	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/navBar.css"/>
 	<script src="https://kit.fontawesome.com/911a8faad0.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-	<nav>
-		<ul class="menu">
-			<li>
-				<a href="/"><i class="fa-solid fa-house"></i></a>
-			</li>
-			<li th:if="${#request.userPrincipal}"> 
-				<span th:text="'ciao ' + ${#request.userPrincipal.principal.username}"></span> 
-			</li>
-			<li th:if="${#request.userPrincipal}"> 
-				<a class="" href="/logout">Logout</a>
-			</li>
+	<header class="header">
+		<a href="/" class="logo"><img class="logo" src="/images/logo-siw.png" /></a>
+		<nav class="navbar">
+			<a href="/" class="active"><i class="fa-solid fa-house"></i></a>
+			<a href="/formSearchMovies">Cerca Film</a>
+			<a href="">Cerca Artista</a>
+			<span th:if="${#request.userPrincipal}" th:text="'Ciao ' + ${#request.userPrincipal.principal.username}"></span>
+			<a th:if="${#request.userPrincipal}" class="" href="/logout">Logout</a>
+			<a th:unless="${#request.userPrincipal}" class="" href="/login">Login/Register</a>
+		</nav>
+	</header>
+
+	<div class="formNewMovie">
+		<h1>Aggiungi Artista</h1>
+		<form th:action="@{/admin/artist}" method="POST" th:object="${artist}">
+		
 			
-			<li th:unless="${#request.userPrincipal}">
-				<a class="" href="/login">Login/Register</a>
-			</li>
-			<li><a href="/formSearchMovies">Cerca Film</a></li>
-		</ul>
-	</nav>
+			<div>
+				<span><input type="text" placeholder="Nome" th:field="${artist.name}" required/></span>
+			</div>
 
-	<div><a href="/"><img src="/images/logo-siw.png" width="50%"/></a></div>
-	<h1>Aggiungi un artista</h1>
-	<form th:action="@{/admin/artist}" method="POST" th:object="${artist}">
-		<div>
-			<span th:text="${messaggioErrore}">Errore</span>
-		</div>
-		
-		<div>
-			<label>Nome:</label> <span><input required type="text" th:field="${artist.name}" /></span>
-		</div>
+			<div>
+				<span><input type="text" placeholder="Cognome" th:field="${artist.surname}" required/></span>
+			</div>
 
-		<div>
-			<label>Cognome:</label> <span><input required type="text" th:field="${artist.surname}" /></span>
-		</div>
+			<div>
+				<span><input type="date" placeholder="Data di Nascita" th:field="${artist.dateOfBirth}" required /></span>
+			</div>
 
-		<div>
-			<label>Data di nascita:</label> <span><input type="date" th:field="${artist.dateOfBirth}" /></span>
-		</div>
+			<div>
+				<span><input type="text" placeholder="Url immagine" th:field="${artist.urlOfPicture}" /></span>
+			</div>
 
-		<div>
-			<label>Fotografia (url):</label> <span><input type="text" th:field="${artist.urlOfPicture}" /></span>
-		</div>
-		
-		<div>
-			<span><button type="submit">Conferma</button></span>
-		</div>
-	</form>
+			<div class="formNewMovie-btn">
+				<button type="submit">Conferma</button>
+			</div>
+		</form>
+	</div>
 </body>
 
 </html>

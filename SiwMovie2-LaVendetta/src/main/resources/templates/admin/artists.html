@@ -30,6 +30,7 @@
 				  <tr>
 					  <th>Immagine</th>
 					  <th>Nome Cognome</th>
+					  <th th:if="${#request.userPrincipal}">Cancella</th> 
 				</tr>		
 			</thead>
 		  
@@ -41,6 +42,8 @@
 						  <tr>
 							  <td><a th:href="@{'/artist' + '/' + ${artist.id}}" ><img class="tableImage" th:src="${artist.urlOfPicture}"/></a></td>
 							  <td><a th:href="@{'/artist' + '/' + ${artist.id}}" th:text="${artist.name} + ' ' + ${artist.surname}"></a></td>
+							  
+							  <td><a th:href="@{'/admin/removeArtist/' + ${artist.id}}" >Remove Artist</a></td>
 						  </tr>	
 					   </table>
 				  </div>

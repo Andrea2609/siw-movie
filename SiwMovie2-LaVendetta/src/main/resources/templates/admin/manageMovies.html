@@ -29,18 +29,20 @@
 					<th>Immagine</th>
 					<th>Titolo</th>
 					<th>Modifica</th> 
+					<th>Cancella</th> 
 				</tr>		
 			</thead>
 		
 		<tbody>
 			<tr>	
-			<td colspan="3">	
+			<td colspan="4">	
 				<div class="divinterno-manageMovies" >		
 					<table class="table-int-manageMovies" th:each="movie : ${movies}">
 						<tr>
-							<td><a th:href="@{'/movie' + '/' + ${movie.id}}" ><img class="tableImage" th:src="${movie.urlImage}"/></a></td>
-							<td><a th:href="@{'/movie' + '/' + ${movie.id}}" th:text="${movie.title}"></a></td>
-							<td><a th:href="@{'/admin/formUpdateMovie' + '/' + ${movie.id}}" th:text="Aggiorna"></a></td>
+							<td><a th:href="@{'/movie/' + ${movie.id}}" ><img class="tableImage" th:src="${movie.urlImage}"/></a></td>
+							<td><a th:href="@{'/movie/' + ${movie.id}}" th:text="${movie.title}"></a></td>
+							<td><a th:href="@{'/admin/formUpdateMovie/' + ${movie.id}}" th:text="Aggiorna"></a></td>
+							<td><a th:href="@{'/admin/removeMovie/' + ${movie.id}}">Remove Movie</a></td>
 						</tr>	
 					</table>
 				</div>

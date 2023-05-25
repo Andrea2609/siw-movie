@@ -3,6 +3,7 @@ package it.uniroma3.siw.model;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,7 +41,7 @@ public class Movie {
 	@ManyToMany
 	private Set<Artist> actors;
 
-	@OneToMany(mappedBy = "movie")
+	@OneToMany(mappedBy = "movie" ,cascade={CascadeType.REMOVE})
 	private Set<Rewiew> movieRewiews;
 
 	public Set<Rewiew> getMovieRewiews() {

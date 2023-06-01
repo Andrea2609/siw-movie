@@ -1,6 +1,5 @@
 package it.uniroma3.siw.controller;
 
-import java.util.Collection;
 import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -15,4 +15,3 @@ insert into artist (id, name, surname, url_of_picture, date_of_birth) values(nex
 insert into artist (id, name, surname, url_of_picture, date_of_birth) values(nextval('hibernate_sequence'), 'Ronald Lee', 'Ermey', 'https://upload.wikimedia.org/wikipedia/commons/4/4f/RLeeErmeyCrop.jpeg','1944-03-24');	
 insert into artist (id, name, surname, url_of_picture, date_of_birth) values(nextval('hibernate_sequence'), 'Claudio', 'Santamaria', 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Claudio_Santamaria.jpg','1974-07-22');
 insert into artist (id, name, surname, url_of_picture, date_of_birth) values(nextval('hibernate_sequence'), 'Gabriele', 'Mainetti', 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Gabriele_Mainetti%2C_September_2017.jpg/440px-Gabriele_Mainetti%2C_September_2017.jpg','1976-11-07');
-

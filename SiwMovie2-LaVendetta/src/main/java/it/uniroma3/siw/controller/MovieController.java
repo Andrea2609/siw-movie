@@ -7,7 +7,6 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -189,7 +188,7 @@ public class MovieController {
 		Movie movie = movieRepository.findById(id).get();
 		
 		rewiew.setMovie(movie);
-		rewiew.setUser(currentUser);
+		//rewiew.setUser(currentUser);
 		this.rewiewRepository.save(rewiew); 
 
 		model.addAttribute("rewiew", rewiew);

@@ -1,10 +1,12 @@
 package it.uniroma3.siw.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -28,10 +30,10 @@ public class Rewiew {
 	
 	private String description;
 
-	@ManyToOne
-	private User user;
+	@OneToMany(mappedBy = "rewiew")
+	private List<User> user;
 
-	@ManyToOne
+	@OneToMany
 	private Movie movie;
 
 	public Movie getMovie() {
@@ -44,12 +46,12 @@ public class Rewiew {
     }
 
 
-    public User getUser() {
+    public List<User> getUser() {
 		return user;
 	}
 
 
-	public void setUser(User user) {
+	public void setUser(List<User> user) {
 		this.user = user;
 	}
 

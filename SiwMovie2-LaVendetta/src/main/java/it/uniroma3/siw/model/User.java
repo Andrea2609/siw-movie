@@ -1,16 +1,12 @@
 package it.uniroma3.siw.model;
 
-import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,16 +20,16 @@ public class User {
 	private String surname;
 	private String email;
 
-	@OneToMany(mappedBy = "user")
-	private List<Rewiew> rewiews;
+	@ManyToOne
+	private Rewiew rewiew;
 	
 	
-    public List<Rewiew> getRewiews() {
-		return rewiews;
+    public Rewiew getRewiews() {
+		return rewiew;
 	}
 
-	public void setRewiews(List<Rewiew> rewiews) {
-		this.rewiews = rewiews;
+	public void setRewiews(Rewiew rewiew) {
+		this.rewiew = rewiew;
 	}
 
 	public Long getId() {

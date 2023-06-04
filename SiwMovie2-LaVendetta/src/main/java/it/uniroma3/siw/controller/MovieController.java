@@ -28,12 +28,9 @@ import it.uniroma3.siw.repository.ArtistRepository;
 import it.uniroma3.siw.repository.MovieRepository;
 import it.uniroma3.siw.repository.RewiewRepository;
 import it.uniroma3.siw.service.CredentialsService;
-import it.uniroma3.siw.service.MovieService;
 
 @Controller
 public class MovieController {
-	@Autowired
-	private MovieService movieService;
 	@Autowired
 	private RewiewRepository rewiewRepository;
 
@@ -188,7 +185,7 @@ public class MovieController {
 		Movie movie = movieRepository.findById(id).get();
 		
 		rewiew.setMovie(movie);
-		//rewiew.setUser(currentUser);
+		rewiew.setUser(currentUser);
 		this.rewiewRepository.save(rewiew); 
 
 		model.addAttribute("rewiew", rewiew);

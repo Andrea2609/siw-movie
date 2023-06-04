@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,18 +18,7 @@ public class User {
 	private String name;
 	private String surname;
 	private String email;
-
-	@ManyToOne
-	private Rewiew rewiew;
 	
-	
-    public Rewiew getRewiews() {
-		return rewiew;
-	}
-
-	public void setRewiews(Rewiew rewiew) {
-		this.rewiew = rewiew;
-	}
 
 	public Long getId() {
 		return id;

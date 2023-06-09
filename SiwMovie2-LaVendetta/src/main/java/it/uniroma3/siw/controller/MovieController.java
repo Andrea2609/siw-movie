@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -172,13 +173,26 @@ public class MovieController {
 	
 	@GetMapping("/movie/{id}")
 	public String getMovie(@PathVariable Long id, Model model) {
+		Movie movie = movieRepository.findById(id).get();
+		
+		if(!(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken)){
+			UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+			User currentUser = credentials.getUser();
+			boolean HasReviewed = this.rewiewRepository.existsByUserAndMovie(currentUser, movie);
+			model.addAttribute("hasReviewed", HasReviewed);
+		}
+
 		model.addAttribute("rewiew", new Rewiew());
 		model.addAttribute("movie", this.movieRepository.findById(id).get());
+		
 		return "movie.html";
 	}
 
+
 	@PostMapping("/addRewiew/{id}")
-	public String newRewiew(@PathVariable Long id ,@ModelAttribute Rewiew rewiew, Model model) {
+	public String newRewiew(@PathVariable Long id ,@ModelAttribute Rewiew rewiew, Model model, User user) {
+		
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
 		User currentUser = credentials.getUser();
@@ -188,8 +202,11 @@ public class MovieController {
 		rewiew.setUser(currentUser);
 		this.rewiewRepository.save(rewiew); 
 
+		boolean HasReviewed = this.rewiewRepository.existsByUserAndMovie(currentUser, movie);
+
 		model.addAttribute("rewiew", rewiew);
 		model.addAttribute("movie", this.movieRepository.findById(id).get());
+		model.addAttribute("hasReviewed", HasReviewed);
 		return "movie.html";
 	}
 

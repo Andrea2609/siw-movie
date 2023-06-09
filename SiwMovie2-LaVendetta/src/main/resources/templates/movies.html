@@ -15,7 +15,7 @@
 		<a href="/" class="logo"><img class="logo" src="/images/logo-siw.png" /></a>
 		<nav class="navbar">
 			<a href="/" class="active"><i class="fa-solid fa-house"></i></a>
-			<a href="">Cerca Film</a>
+			<a href="/formSearchMovies">Cerca Film</a>
 			<a href="">Cerca Artista</a>
 			<span th:if="${#request.userPrincipal}" th:text="'Ciao ' + ${#request.userPrincipal.principal.username}"></span>
 			<a th:if="${#request.userPrincipal}" class="" href="/logout">Logout</a>

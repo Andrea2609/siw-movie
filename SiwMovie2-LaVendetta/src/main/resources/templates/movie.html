@@ -107,7 +107,7 @@
 		</tbody>
 		</table>
 
-		<form th:if="${#request.userPrincipal}" id="feedback" th:action="@{'/addRewiew' + '/' + ${movie.id}}" method="POST" th:object="${rewiew}">
+		<form th:if="${#request.userPrincipal != null  && (!hasReviewed)}" id="feedback" th:action="@{'/addRewiew' + '/' + ${movie.id}}" method="POST" th:object="${rewiew}">
 		
 			<div class="pinfo">Titolo</div>
 			

@@ -112,7 +112,8 @@ public class MovieController {
 		if (!bindingResult.hasErrors()) {
 			this.movieRepository.save(movie); 
 			model.addAttribute("movie", movie);
-			return "movie.html";
+			model.addAttribute("movies", this.movieRepository.findAll());
+			return "redirect:/admin/manageMovies";
 		} else {
 			return "admin/formNewMovie.html"; 
 		}

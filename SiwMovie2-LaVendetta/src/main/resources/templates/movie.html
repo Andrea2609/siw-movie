@@ -12,7 +12,7 @@
 	<header class="header">
 		<a href="/" class="logo"><img class="logo" src="/images/logo-siw.png" /></a>
 		<nav class="navbar">
-			<a href="" class="active"><i class="fa-solid fa-house"></i></a>
+			<a href="/" class="active"><i class="fa-solid fa-house"></i></a>
 			<a href="/formSearchMovies">Cerca Film</a>
 			<a href="">Cerca Artista</a>
 			<span th:if="${#request.userPrincipal}" th:text="'Ciao ' + ${#request.userPrincipal.principal.username}"></span>
@@ -65,7 +65,7 @@
 			  <tr>	
 			  	<td colspan="2">	
 				  	<div class="divinterno" >	
-						<center><div class="noFilm" th:if="${movie.getActors() == null}">NESSUN ATTORE</div></center>	
+						<center><div class="noFilm" th:if="${movie.actors.isEmpty()}">NESSUN ATTORE</div></center>	
 					  	<table class="table-int" th:each="actor : ${movie.actors}">
 						  	<tr>
 							  	<td><a th:href="@{'/artist' + '/' + ${actor.id}}"><img class="tableImage" th:src="${actor.urlOfPicture}"/></a></td>

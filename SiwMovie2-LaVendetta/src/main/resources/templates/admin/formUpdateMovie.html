@@ -25,7 +25,8 @@
 
 	<div class="formUpdateMovie">
 			<center><div><img class="filmImage-updateMovie" th:src="${movie.urlImage}"></div></center>
-			<span class="movieTitle" th:text="${movie.title}">Up!</span>
+			<span class="movieTitle" th:text="${movie.title} ">Up!</span>
+			
 				
 			
 			<div class="formUpdateMovie-RegistaAttori">
@@ -55,6 +56,9 @@
 						<a th:href="@{'/admin/updateActors/' + ${movie.id}}">Aggiungi Attore</a>
 					</div>
 				</div>
+			</div>
+			<div class="formUpdateMovie">
+				
 			</div>
 			<div th:unless="${movie}">Film non esistente</div>
 	</div>

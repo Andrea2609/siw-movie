@@ -41,7 +41,7 @@
 						<tr>
 							<td><a th:href="@{'/movie/' + ${movie.id}}" ><img class="tableImage" th:src="${movie.urlImage}"/></a></td>
 							<td><a th:href="@{'/movie/' + ${movie.id}}" th:text="${movie.title}"></a></td>
-							<td><a th:href="@{'/admin/formUpdateMovie/' + ${movie.id}}" th:text="Aggiorna"></a></td>
+							<td><a th:href="@{'/admin/formUpdateMovie/' + ${movie.id}}" th:text="Modifica"></a></td>
 							<td><a th:href="@{'/admin/removeMovie/' + ${movie.id}}">Remove Movie</a></td>
 						</tr>	
 					</table>

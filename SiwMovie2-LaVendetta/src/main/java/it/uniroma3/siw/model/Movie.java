@@ -1,8 +1,10 @@
 package it.uniroma3.siw.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,6 +43,11 @@ public class Movie {
 
 	@OneToMany(mappedBy = "movie")
 	private List<Rewiew> movieRewiews;
+
+	public Movie() {
+		this.actors = new TreeSet<Artist>();
+		this.movieRewiews = new ArrayList<Rewiew>();
+	}
 
 	public List<Rewiew> getMovieRewiews() {
 		return movieRewiews;

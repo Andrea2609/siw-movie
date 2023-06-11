@@ -1,6 +1,6 @@
 package it.uniroma3.siw.model;
 
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,8 +15,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 @Entity
 public class Artist {
     @Id
@@ -28,9 +26,9 @@ public class Artist {
 
 	@NotNull
 	private String surname;
-	
-	@DateTimeFormat(pattern = "YYYY-MM-dd")
-	private LocalDate dateOfBirth;
+		
+	private Date dateOfBirth;
+
 	private String urlOfPicture;
 	
 	@ManyToMany(mappedBy="actors")
@@ -68,11 +66,11 @@ public class Artist {
 		this.surname = surname;
 	}
 	
-	public LocalDate getDateOfBirth() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 	
-	public void setDateOfBirth(LocalDate dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	

@@ -5,9 +5,10 @@
 	<title>
 		New Artist
 	</title>
-	<link rel="stylesheet" href="/css/stile.css" />
+	
 	<link rel="stylesheet" href="/css/navBar.css"/>
 	<script src="https://kit.fontawesome.com/911a8faad0.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
 <body>
@@ -23,32 +24,89 @@
 		</nav>
 	</header>
 
-	<div class="formNewMovie">
-		<h1>Aggiungi Artista</h1>
-		<form th:action="@{/admin/artist}" method="POST" th:object="${artist}">
+	<style>
+		.form-container {
+		  max-width: 500px;
+		  margin: 0 auto;
+		  background-color: #f5f5f5;
+		  padding: 20px;
+		  border-radius: 4px;
+		}
+	  
+		.form-container label {
+		  display: flex;
+		  align-items: center;
+		  margin-bottom: 5px;
+		  font-weight: bold;
+		}
+	  
+		.form-container input[type="text"],
+		.form-container input[type="date"],
+		.form-container input[type="file"] {
+		  flex: 1;
+		  padding: 8px;
+		  margin-bottom: 10px;
+		  border-radius: 4px;
+		  border: 1px solid #ccc;
+		  box-sizing: border-box;
+		  position: relative;
+		}
+	  
+		.form-container button {
+		  background-color: #4CAF50;
+		  color: white;
+		  padding: 10px 15px;
+		  border: none;
+		  border-radius: 4px;
+		  cursor: pointer;
+		}
+	  
+		.form-container button:hover {
+		  background-color: #45a049;
+		}
+	  </style>
+	  
+	  <div class="form-container">
+		<form th:action="@{/admin/artist}" method="POST" enctype="multipart/form-data" th:object="${artist}">
+		  <div>
+			<label for="nome">
+			  <i class="fas fa-user"></i> Nome:
+			</label>
+			<input type="text" id="nome" th:name="nome" th:field="${artist.name}" required>
+		  </div>
+	  
+		  <div>
+			<label for="cognome">
+			  <i class="fas fa-user"></i> Cognome:
+			</label>
+			<input type="text" id="cognome" th:name="cognome" th:field="${artist.surname}" required>
+		  </div>
+	  
+		  <div>
+			<label for="dataNascita">
+			  <i class="fas fa-calendar-alt"></i> Data di Nascita:
+			</label>
+			<input type="date" id="dataNascita" th:name="dataNascita" th:field="${artist.dateOfBirth}" required>
+		  </div>
 		
-			
-			<div>
-				<span><input type="text" placeholder="Nome" th:field="${artist.name}" required/></span>
-			</div>
-
-			<div>
-				<span><input type="text" placeholder="Cognome" th:field="${artist.surname}" required/></span>
-			</div>
-
-			<div>
-				<span><input type="date" placeholder="Data di Nascita" th:field="${artist.dateOfBirth}" required /></span>
-			</div>
-
-			<div>
-				<span><input type="text" placeholder="Url immagine" th:field="${artist.urlOfPicture}" /></span>
-			</div>
-
-			<div class="formNewMovie-btn">
-				<button type="submit">Conferma</button>
-			</div>
+	  
+		  <div>
+			<label for="foto">
+			  <i class="fas fa-image"></i> Foto:
+			</label>
+			<input type="file" id="foto" th:name="foto">
+		  </div>
+	  
+		  <div class="formNewArtist-btn">
+			<button type="submit">Conferma</button>
+		  </div>
 		</form>
-	</div>
+	  </div>
+	  
+	  
+	  
+	  
+	  
 </body>
 
 </html>

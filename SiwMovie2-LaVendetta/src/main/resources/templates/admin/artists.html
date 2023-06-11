@@ -25,7 +25,7 @@
 	<center>
 
 		<div th:if="${artists==null || artists.isEmpty()}">Non ci sono artisti nel sistema</div>
-		<table class="table-ext">
+		<table class="table-ext-admin-artists">
 			<thead>
 				  <tr>
 					  <th>Immagine</th>
@@ -38,8 +38,8 @@
 		  <tbody>
 			  <tr>	
 			  <td colspan="4">	
-				  <div class="divinterno" >		
-					  <table class="table-int" th:each="artist : ${artists}">
+				  <div class="divinterno-admin-artists" >		
+					  <table class="table-int-admin-artists" th:each="artist : ${artists}">
 						  <tr>
 							  <td><a th:href="@{'/artist' + '/' + ${artist.id}}" ><img class="tableImage" th:src="${artist.urlOfPicture}"/></a></td>
 							  <td><a th:href="@{'/artist' + '/' + ${artist.id}}" th:text="${artist.name} + ' ' + ${artist.surname}"></a></td>

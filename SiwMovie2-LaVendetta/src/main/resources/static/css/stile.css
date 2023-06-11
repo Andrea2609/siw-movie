@@ -385,6 +385,86 @@ h1{
 	
 }
 
+.rewiew-remove{
+	width:60%;
+	background-color: #494949dc;
+	position: relative;
+	
+}
+
+.rewiew-remove .table-int-remove td {
+	height:40px;
+	line-height:100px;
+	width: 20%;
+	border-bottom: 2px solid black;
+	text-align: center;
+}
+
+.table-int-remove{
+	height:40px;
+	line-height:100px;
+	width: 100%;
+	text-align: center;
+}
+
+.rewiew-remove thead th{
+	height:60px;
+	line-height:50px;
+	text-align: center;
+	padding: 0 0 0 5px;
+	background: rgba(255, 0, 0, 0.281);
+	color:#fff;
+	width: 20%;
+}
+
+.divinterno-rewiew-remove{
+	height:auto; 
+	overflow: auto;
+	width:100%;
+}
+
+.rewiew-remove .fa-solid {
+	margin: 10px;
+	color: #a17f11da;
+}
+
+
+.table-ext-admin-artists{
+	width:70%;
+	background-color: #4949495d;
+	position: relative;
+}
+
+.divinterno-admin-artists{
+	height:640px; 
+	overflow: auto;
+	width:100%;
+}
+.table-int-admin-artists{
+	height:40px;
+	line-height:100px;
+	width: 100%;
+	text-align: center;
+}
+
+.table-int-admin-artists td {
+	height:40px;
+	line-height:100px;
+	width: 25%;
+	border-bottom: 2px solid black;
+	text-align: center;
+}
+
+.table-ext-admin-artists thead th{
+	height:60px;
+	line-height:50px;
+	text-align: center;
+	padding: 0 0 0 5px;
+	background: rgba(255, 0, 0, 0.281);
+	color:#fff;
+	width: 25%;
+}
+
 
 .table-ext {
 	width:50%;
@@ -461,14 +541,16 @@ text-align: center;
 	margin: 15px;
 }
 
-.table-int td a{
+.table-int td a,
+.table-ext-admin-artists td a{
 	color: #ddd;
 	text-decoration: none;
 	transition: .2s;
 	font-size: 18px;
 }
 
-.table-int td a:hover{
+.table-int td a:hover,
+.table-int-admin-artists td a:hover{
 	font-size: 19px;
 	color:rgb(98, 192, 144);
 	text-decoration: none;

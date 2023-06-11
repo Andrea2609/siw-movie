@@ -14,19 +14,23 @@ import it.uniroma3.siw.model.Artist;
 import it.uniroma3.siw.model.Movie;
 import it.uniroma3.siw.repository.ArtistRepository;
 import it.uniroma3.siw.repository.MovieRepository;
+import it.uniroma3.siw.service.ArtistService;
+import it.uniroma3.siw.service.MovieService;
 
 @Controller
 public class ArtistController {
 	
+	@Autowired
+	private ArtistService artistService;
+	@Autowired 
+	private MovieService movieService;
 	@Autowired 
 	private ArtistRepository artistRepository;
 
-	@Autowired
-	private MovieRepository movieRepository;
-
 	@GetMapping(value="/admin/formUpdateArtist/{id}")
 	public String formUpdateArtist(@PathVariable Long id, Model model) {
-		model.addAttribute("artist", artistRepository.findById(id).get());
+		Artist artist = this.artistService.findById(id);
+		model.addAttribute("artist", artist);
 		return "admin/formUpdateArtist.html";
 	}
 
@@ -43,33 +47,17 @@ public class ArtistController {
 
 	@GetMapping(value = "/admin/removeArtist/{actorId}")
 	public String removeArtist(@PathVariable Long actorId) {
-		Artist toBeDeleted = this.artistRepository.findById(actorId).get();
-		
-		for(Movie movie : toBeDeleted.getActorOf()){
-			movie.getActors().remove(toBeDeleted);
-			movieRepository.saveAndFlush(movie);
-		}
-
-		for(Movie movie : toBeDeleted.getDirectorOf()){
-			if(movie.getDirector() == toBeDeleted){
-				movie.setDirector(null);
-				movieRepository.saveAndFlush(movie);
-			}
-		}
-		toBeDeleted.setDirectorOf(Collections.emptyList());
-		toBeDeleted.setActorOf(Collections.emptySet());
-		this.artistRepository.saveAndFlush(toBeDeleted);
-		this.artistRepository.deleteById(actorId);
-		
-		return "redirect:/admin/artist";
+		artistService.removeArtist(actorId);		
+		return "redirect:/admin/artists";
 	}
 	
 	@PostMapping("/admin/artist")
 	public String newArtist(@ModelAttribute Artist artist, Model model) {
-		if (!artistRepository.existsByNameAndSurname(artist.getName(), artist.getSurname())) {
-			this.artistRepository.save(artist); 
+		if (!this.artistService.existsByNameAndSurname(artist)) {
+			this.artistService.save(artist); 
 			model.addAttribute("artist", artist);
-			return "artist.html";
+			model.addAttribute("artists", this.artistRepository.findAll());
+			return "redirect:/admin/artists";
 		} else {
 			model.addAttribute("messaggioErrore", "Questo artista esiste già");
 			return "admin/formNewArtist.html"; 
@@ -78,7 +66,8 @@ public class ArtistController {
 
 	@GetMapping("/artist/{id}")
 	public String getArtist(@PathVariable Long id, Model model) {
-		model.addAttribute("artist", this.artistRepository.findById(id).get());
+		Artist artist = this.artistService.findById(id);
+		model.addAttribute("artist", artist);
 		return "artist.html";
 	}
 

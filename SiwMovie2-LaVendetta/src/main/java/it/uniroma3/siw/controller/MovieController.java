@@ -30,6 +30,7 @@ import it.uniroma3.siw.repository.MovieRepository;
 import it.uniroma3.siw.repository.RewiewRepository;
 import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.MovieService;
+import it.uniroma3.siw.service.ReviewService;
 
 @Controller
 public class MovieController {
@@ -51,6 +52,9 @@ public class MovieController {
 	@Autowired
 	private MovieService movieService;
 
+	 @Autowired
+	 private ReviewService reviewService;
+
 	/***************************ADMIN**************************************/
 	@GetMapping(value="/admin/formNewMovie")
 	public String formNewMovie(Model model) {
@@ -60,7 +64,8 @@ public class MovieController {
 
 	@GetMapping(value="/admin/formUpdateMovie/{id}")
 	public String formUpdateMovie(@PathVariable Long id, Model model) {
-		model.addAttribute("movie", movieRepository.findById(id).get());
+		Movie movie = movieService.findById(id);
+		model.addAttribute("movie", movie);
 		return "admin/formUpdateMovie.html";
 	}
 
@@ -70,19 +75,17 @@ public class MovieController {
 	}
 
 	@GetMapping(value = "/admin/removeMovie/{movieId}")
-	public String removeArtist(@PathVariable Long movieId) {
-		Movie toBeDeleted = this.movieRepository.findById(movieId).get();
-		
-		for(Artist artist : toBeDeleted.getActors()){
-			artist.getActorOf().remove(toBeDeleted);
-			artistRepository.saveAndFlush(artist);
-		}
-
-		toBeDeleted.setDirector(null);
-		this.movieRepository.saveAndFlush(toBeDeleted);
-		this.movieRepository.deleteById(movieId);
-		
+	public String removeMovie(@PathVariable Long movieId) {
+		movieService.removeMovie(movieId);		
 		return "redirect:/admin/manageMovies";
+	}
+
+	@GetMapping(value = "/admin/removeReview/{movieId}/{rewiewId}")
+	public String removeReview(@PathVariable("movieId") Long movieId, @PathVariable ("rewiewId") Long rewiewId, Model model) {
+		movieService.removeReview(rewiewId);
+		Movie movie = movieService.findById(movieId);	
+		model.addAttribute("movie", movie);	
+		return "admin/formUpdateMovie.html";
 	}
 	
 	@GetMapping(value="/admin/manageMovies")
@@ -102,7 +105,8 @@ public class MovieController {
 	@GetMapping(value="/admin/addDirector/{id}")
 	public String addDirector(@PathVariable Long id, Model model) {
 		model.addAttribute("artists", artistRepository.findAll());
-		model.addAttribute("movie", movieRepository.findById(id).get());
+		Movie movie = movieService.findById(id);
+		model.addAttribute("movie", movie);
 		return "admin/directorsToAdd.html";
 	}
 
@@ -125,21 +129,15 @@ public class MovieController {
 
 		List<Artist> actorsToAdd = this.actorsToAdd(id);
 		model.addAttribute("actorsToAdd", actorsToAdd);
-		model.addAttribute("movie", this.movieRepository.findById(id).get());
+		model.addAttribute("movie", this.movieService.findById(id));
 
 		return "admin/actorsToAdd.html";
 	}
 
 	@GetMapping(value="/admin/addActorToMovie/{actorId}/{movieId}")
 	public String addActorToMovie(@PathVariable Long actorId, @PathVariable Long movieId, Model model) {
-		Movie movie = this.movieRepository.findById(movieId).get();
-		Artist actor = this.artistRepository.findById(actorId).get();
-		Set<Artist> actors = movie.getActors();
-		actors.add(actor);
-		this.movieRepository.save(movie);
-		
+		Movie movie = this.movieService.addActorToMovie(movieId, actorId);
 		List<Artist> actorsToAdd = actorsToAdd(movieId);
-		
 		model.addAttribute("movie", movie);
 		model.addAttribute("actorsToAdd", actorsToAdd);
 
@@ -148,17 +146,10 @@ public class MovieController {
 	
 	@GetMapping(value="/admin/removeActorFromMovie/{actorId}/{movieId}")
 	public String removeActorFromMovie(@PathVariable Long actorId, @PathVariable Long movieId, Model model) {
-		Movie movie = this.movieRepository.findById(movieId).get();
-		Artist actor = this.artistRepository.findById(actorId).get();
-		Set<Artist> actors = movie.getActors();
-		actors.remove(actor);
-		this.movieRepository.save(movie);
-
+		Movie movie = movieService.removeActorFromMovie(movieId, actorId);
 		List<Artist> actorsToAdd = actorsToAdd(movieId);
-		
 		model.addAttribute("movie", movie);
 		model.addAttribute("actorsToAdd", actorsToAdd);
-
 		return "admin/actorsToAdd.html";
 	}
 
@@ -175,18 +166,16 @@ public class MovieController {
 	
 	@GetMapping("/movie/{id}")
 	public String getMovie(@PathVariable Long id, Model model) {
-		Movie movie = movieRepository.findById(id).get();
-		
+		Movie movie = movieService.getMovie(id);
 		if(!(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken)){
 			UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
 			User currentUser = credentials.getUser();
-			boolean HasReviewed = this.rewiewRepository.existsByUserAndMovie(currentUser, movie);
+			boolean HasReviewed = this.reviewService.HasReviewed(currentUser, movie);
 			model.addAttribute("hasReviewed", HasReviewed);
 		}
-
 		model.addAttribute("rewiew", new Rewiew());
-		model.addAttribute("movie", this.movieRepository.findById(id).get());
+		model.addAttribute("movie", movie);
 		
 		return "movie.html";
 	}
@@ -198,16 +187,13 @@ public class MovieController {
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
 		User currentUser = credentials.getUser();
-		Movie movie = movieRepository.findById(id).get();
-		
-		rewiew.setMovie(movie);
-		rewiew.setUser(currentUser);
-		this.rewiewRepository.save(rewiew); 
 
-		boolean HasReviewed = this.rewiewRepository.existsByUserAndMovie(currentUser, movie);
+		Movie movie = this.movieService.newReview(id, rewiew, currentUser);
+
+		boolean HasReviewed = this.reviewService.HasReviewed(currentUser, movie);
 
 		model.addAttribute("rewiew", rewiew);
-		model.addAttribute("movie", this.movieRepository.findById(id).get());
+		model.addAttribute("movie", movie);
 		model.addAttribute("hasReviewed", HasReviewed);
 		return "movie.html";
 	}

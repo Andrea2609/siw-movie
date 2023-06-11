@@ -57,9 +57,34 @@
 					</div>
 				</div>
 			</div>
-			<div class="formUpdateMovie">
+				<table class="rewiew-remove">
+					<thead>
+						<th>User</th>						
+						<th>Titolo</th>		
+						<th>Rating <i class="fa-solid fa-star"></i></th>	
+						<th>Descrizione</th>
+						<th>Cancella</th>			
+					</thead>
 				
-			</div>
+				<tbody>
+					<tr>	
+						<td colspan="5">	
+							<div class="divinterno-rewiew-remove" >	
+								<center><div class="noFilm" th:if="${movie.movieRewiews.isEmpty()}">NESSUNA RECENSIONE</div></center>	
+								<table class="table-int-remove" th:each="rewiew: ${movie.movieRewiews}">
+									<tr>
+										<td><span th:text="${rewiew.user.name}"></span></td>
+										<td><span th:text="${rewiew.title}"></span></td>
+										<td><span th:text="${rewiew.rating}"></span><i class="fa-solid fa-star"></i></td>
+										<td><span th:text="${rewiew.description}"></span></td>
+										<td><a th:href="@{'/admin/removeReview/' + ${movie.id} + '/' + ${rewiew.id}}">Remove review</a></td>
+									</tr>	
+								</table>
+							</div>
+						</td>
+					</tr> 
+				</tbody>
+				</table>
 			<div th:unless="${movie}">Film non esistente</div>
 	</div>
 </body>

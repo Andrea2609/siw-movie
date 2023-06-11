@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import it.uniroma3.siw.repository.RewiewRepository;
 
 @Controller
-public class RewiewController {
+public class ReviewController {
 	
 	@Autowired 
 	private RewiewRepository rewiewRepository;

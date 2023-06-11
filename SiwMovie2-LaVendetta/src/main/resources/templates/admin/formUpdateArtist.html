@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		New Movie
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/navBar.css"/>
+	<script src="https://kit.fontawesome.com/911a8faad0.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<header class="header">
+		<a href="/" class="logo"><img class="logo" src="/images/logo-siw.png" /></a>
+		<nav class="navbar">
+			<a href="/" class="active"><i class="fa-solid fa-house"></i></a>
+			<a href="/formSearchMovies">Cerca Film</a>
+			<a href="">Cerca Artista</a>
+			<span th:if="${#request.userPrincipal}" th:text="'Ciao ' + ${#request.userPrincipal.principal.username}"></span>
+			<a th:if="${#request.userPrincipal}" class="" href="/logout">Logout</a>
+			<a th:unless="${#request.userPrincipal}" class="" href="/login">Login/Register</a>
+		</nav>
+	</header>
+
+	<div class="formUpdateMovie">
+			<center><div><img class="filmImage-updateMovie" th:src="${artist.urlOfPicture}"></div></center>
+			<span class="movieTitle" th:text="${artist.name} + ' ' +${artist.surname} ">Up!</span>
+			
+				
+			
+			<!-- <div class="formUpdateMovie-RegistaAttori">
+				<div th:if="${movie.director}">
+					<h2>Regista</h2>
+						<div><a th:href="@{'/artist' + '/' + ${movie.director.id}}"><img class="updateMovie-img" th:src="${movie.director.urlOfPicture}" ></a></div>	
+						<div class="directorName" th:text="${movie.director.name} + ' ' + ${movie.director.surname}">Steven Spielberg</div>
+						<a th:href="@{'/admin/addDirector/' + ${movie.id}}">Modifica regista</a>	
+						
+				</div>
+				<div th:unless="${movie.director}">
+					<a th:href="@{'/admin/addDirector/' + ${movie.id}}">Aggiungi regista</a>
+				</div>
+
+				<div class="updateAttori">	
+					<div th:if="${!movie.getActors().isEmpty()}">
+						<h2>Attori</h2>
+						<div class="listActor">
+							<div class="singleActor" th:each="actor: ${movie.actors}">
+								<img class="updateMovie-img2" th:src="${actor.urlOfPicture}">
+								<a th:href="@{'/artist' + '/' + ${actor.id}}"><span th:text="${actor.name} + ' ' + ${actor.surname}">Al Pacino</span></a>
+							</div>
+						</div>
+						<a th:href="@{'/admin/updateActors/' + ${movie.id}}">Modifica Attori</a>
+					</div>
+					<div th:unless="${!movie.getActors().isEmpty()}">
+						<a th:href="@{'/admin/updateActors/' + ${movie.id}}">Aggiungi Attore</a>
+					</div>
+				</div>
+			</div>
+			<div class="formUpdateMovie">
+				
+			</div>-->
+			<div th:unless="${artis}">Artista non esistente</div>
+	</div>
+</body>
+
+</html>

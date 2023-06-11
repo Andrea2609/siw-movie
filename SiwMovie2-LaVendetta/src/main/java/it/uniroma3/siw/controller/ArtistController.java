@@ -24,6 +24,12 @@ public class ArtistController {
 	@Autowired
 	private MovieRepository movieRepository;
 
+	@GetMapping(value="/admin/formUpdateArtist/{id}")
+	public String formUpdateArtist(@PathVariable Long id, Model model) {
+		model.addAttribute("artist", artistRepository.findById(id).get());
+		return "admin/formUpdateArtist.html";
+	}
+
 	@GetMapping(value="/admin/formNewArtist")
 	public String formNewArtist(Model model) {
 		model.addAttribute("artist", new Artist());

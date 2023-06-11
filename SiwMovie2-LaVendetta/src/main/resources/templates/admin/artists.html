@@ -30,19 +30,20 @@
 				  <tr>
 					  <th>Immagine</th>
 					  <th>Nome Cognome</th>
+					  <th>Modifica</th>
 					  <th th:if="${#request.userPrincipal}">Cancella</th> 
 				</tr>		
 			</thead>
 		  
 		  <tbody>
 			  <tr>	
-			  <td colspan="3">	
+			  <td colspan="4">	
 				  <div class="divinterno" >		
 					  <table class="table-int" th:each="artist : ${artists}">
 						  <tr>
 							  <td><a th:href="@{'/artist' + '/' + ${artist.id}}" ><img class="tableImage" th:src="${artist.urlOfPicture}"/></a></td>
 							  <td><a th:href="@{'/artist' + '/' + ${artist.id}}" th:text="${artist.name} + ' ' + ${artist.surname}"></a></td>
-							  
+							  <td><a th:href="@{'/admin/formUpdateArtist/' + ${artist.id}}" th:text="Modifica"></a></td>
 							  <td><a th:href="@{'/admin/removeArtist/' + ${artist.id}}" >Remove Artist</a></td>
 						  </tr>	
 					   </table>

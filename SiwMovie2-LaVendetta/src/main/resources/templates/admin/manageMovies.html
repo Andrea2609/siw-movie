@@ -39,7 +39,7 @@
 				<div class="divinterno-manageMovies" >		
 					<table class="table-int-manageMovies" th:each="movie : ${movies}">
 						<tr>
-							<td><a th:href="@{'/movie/' + ${movie.id}}" ><img class="tableImage" th:src="'/' + ${movie.image.imagePath}"/></a></td>
+							<td ><a th:href="@{'/movie/' + ${movie.id}}" ><img class="tableImage" th:src="'/' + ${movie.image.imagePath}"/></a></td>
 							<td><a th:href="@{'/movie/' + ${movie.id}}" th:text="${movie.title}"></a></td>
 							<td><a th:href="@{'/admin/formUpdateMovie/' + ${movie.id}}" th:text="Modifica"></a></td>
 							<td><a th:href="@{'/admin/removeMovie/' + ${movie.id}}">Remove Movie</a></td>

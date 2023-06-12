@@ -1,7 +1,7 @@
 package it.uniroma3.siw.service;
 
 import java.util.Collections;
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,11 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.uniroma3.siw.model.Artist;
 import it.uniroma3.siw.model.Movie;
-import it.uniroma3.siw.model.Rewiew;
-import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.repository.ArtistRepository;
 import it.uniroma3.siw.repository.MovieRepository;
-import it.uniroma3.siw.repository.RewiewRepository;
 
 @Service
 public class ArtistService {
@@ -21,14 +18,29 @@ public class ArtistService {
     private MovieRepository movieRepository;
     @Autowired
     private ArtistRepository artistRepository;
-    @Autowired 
-    private CredentialsService credentialsService;
-    @Autowired 
-    private RewiewRepository rewiewRepository;
+
 
     @Transactional
     public Artist findById(Long id){ 
         Artist artist = this.artistRepository.findById(id).get();
+        return artist;
+    }
+
+    @Transactional
+    public List<Artist> findByName(String name){ 
+        List<Artist> artist = this.artistRepository.findByName(name);
+        return artist;
+    }
+
+    @Transactional
+    public Object findBySurname(String surname) {
+       List<Artist> artist = this.artistRepository.findBySurname(surname);
+        return artist;
+    }
+
+    @Transactional
+    public List<Artist> findByYear(int year){ 
+        List<Artist> artist = this.artistRepository.findBydateOfBirth(year);
         return artist;
     }
 
@@ -78,4 +90,6 @@ public class ArtistService {
 		this.artistRepository.saveAndFlush(toBeDeleted);
 		this.artistRepository.deleteById(actorId);
     }
+
+   
 }

@@ -17,7 +17,7 @@
 		<nav class="navbar">
 			<a href="/" class="active"><i class="fa-solid fa-house"></i></a>
 			<a href="/formSearchMovies">Cerca Film</a>
-			<a href="">Cerca Artista</a>
+			<a href="/formSearchArtists">Cerca Artista</a>
 			<span th:if="${#request.userPrincipal}" th:text="'Ciao ' + ${#request.userPrincipal.principal.username}"></span>
 			<a th:if="${#request.userPrincipal}" class="" href="/logout">Logout</a>
 			<a th:unless="${#request.userPrincipal}" class="" href="/login">Login/Register</a>
@@ -34,16 +34,15 @@
 		}
 	  
 		.form-container label {
-		  display: flex;
-		  align-items: center;
 		  margin-bottom: 5px;
 		  font-weight: bold;
+		  
 		}
 	  
 		.form-container input[type="text"],
 		.form-container input[type="date"],
 		.form-container input[type="file"] {
-		  flex: 1;
+		  width: 95%;
 		  padding: 8px;
 		  margin-bottom: 10px;
 		  border-radius: 4px;
@@ -59,32 +58,38 @@
 		  border: none;
 		  border-radius: 4px;
 		  cursor: pointer;
+		  width: 100%;
 		}
 	  
 		.form-container button:hover {
 		  background-color: #45a049;
 		}
+
+		.div label i {
+			margin-right: 5px;
+		}
+
 	  </style>
 	  
 	  <div class="form-container">
 		<form th:action="@{/admin/artist}" method="POST" enctype="multipart/form-data" th:object="${artist}">
 		  <div>
 			<label for="nome">
-			  <i class="fas fa-user"></i> Nome:
+			  <i class="fas fa-user"></i>
 			</label>
-			<input type="text" id="nome" th:name="nome" th:field="${artist.name}" required>
+			<input type="text" id="nome" placeholder="Nome" th:name="nome" th:field="${artist.name}" required>
 		  </div>
 	  
 		  <div>
 			<label for="cognome">
-			  <i class="fas fa-user"></i> Cognome:
+			  <i class="fas fa-user"></i>
 			</label>
-			<input type="text" id="cognome" th:name="cognome" th:field="${artist.surname}" required>
+			<input type="text" id="cognome" placeholder="Congome" th:name="cognome" th:field="${artist.surname}" required>
 		  </div>
 	  
 		  <div>
 			<label for="dataNascita">
-			  <i class="fas fa-calendar-alt"></i> Data di Nascita:
+			  <i class="fas fa-calendar-alt"></i>
 			</label>
 			<input type="date" id="dataNascita" th:name="dataNascita" th:field="${artist.dateOfBirth}" required>
 		  </div>
@@ -92,14 +97,14 @@
 	  
 		  <div>
 			<label for="foto">
-			  <i class="fas fa-image"></i> Foto:
+			  <i class="fas fa-image"></i>
 			</label>
 			<input type="file" id="foto" th:name="foto">
 		  </div>
 	  
-		  <div class="formNewArtist-btn">
+		  <center><div class="formNewArtist-btn">
 			<button type="submit">Conferma</button>
-		  </div>
+		  </div></center>
 		</form>
 	  </div>
 	  

@@ -60,7 +60,23 @@
   			<artifactId>spring-security-taglibs</artifactId>
   			<version>5.0.3.RELEASE</version>
 		</dependency>
-	</dependencies>
+	
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.12.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+			<version>1.18.20</version>
+			<scope>provided</scope>
+		</dependency>
+
+ </dependencies>
+
 
 	<build>
 		<plugins>

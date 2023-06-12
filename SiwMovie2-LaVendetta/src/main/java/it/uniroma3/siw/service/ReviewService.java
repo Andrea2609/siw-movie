@@ -7,16 +7,10 @@ import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.model.Movie;
 import it.uniroma3.siw.model.User;
-import it.uniroma3.siw.repository.ArtistRepository;
-import it.uniroma3.siw.repository.MovieRepository;
 import it.uniroma3.siw.repository.RewiewRepository;
 
 @Service
 public class ReviewService {
-    @Autowired
-    private MovieRepository movieRepository;
-    @Autowired
-    private ArtistRepository artistRepository;
     @Autowired RewiewRepository rewiewRepository;
 
 

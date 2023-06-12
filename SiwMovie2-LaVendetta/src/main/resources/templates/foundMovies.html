@@ -14,7 +14,7 @@
 		<nav class="navbar">
 			<a href="/" class="active"><i class="fa-solid fa-house"></i></a>
 			<a href="/formSearchMovies">Cerca Film</a>
-			<a href="">Cerca Artista</a>
+			<a href="/formSearchArtists">Cerca Artista</a>
 			<span th:if="${#request.userPrincipal}" th:text="'Ciao ' + ${#request.userPrincipal.principal.username}"></span>
 			<a th:if="${#request.userPrincipal}" class="" href="/logout">Logout</a>
 			<a th:unless="${#request.userPrincipal}" class="" href="/login">Login/Register</a>
@@ -39,7 +39,7 @@
 				<center><div style="color: #ffffff;" th:if="${movies.isEmpty()}">Non ci sono film che soddisfano i requisiti</div></center>	
 				  <table class="table-int" th:each="movie : ${movies}">
 					  <tr>
-						  <td><a th:href="@{'/movie' + '/' + ${movie.id}}" ><img class="tableImage" th:src="${movie.urlImage}"/></a></td>
+						  <td><a th:href="@{'/movie' + '/' + ${movie.id}}" ><img class="tableImage" th:src="'/' + ${movie.image.imagePath}"/></a></td>
 						  <td><a th:href="@{'/movie' + '/' + ${movie.id}}" th:text="${movie.title}"></a></td>
 					  </tr>	
 				   </table>

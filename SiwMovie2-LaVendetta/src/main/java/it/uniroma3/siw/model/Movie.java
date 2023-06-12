@@ -33,7 +33,6 @@ public class Movie {
     @Max(2023)
 	private Integer year;
     
-	private String urlImage;
 	
 	@ManyToOne
 	private Artist director;
@@ -43,6 +42,17 @@ public class Movie {
 
 	@OneToMany(mappedBy = "movie")
 	private List<Rewiew> movieRewiews;
+
+	@ManyToOne
+	private Image image;
+
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
 
 	public Movie() {
 		this.actors = new TreeSet<Artist>();
@@ -80,13 +90,6 @@ public class Movie {
 		this.year = year;
 	}
 	
-	public String getUrlImage() {
-		return urlImage;
-	}
-
-	public void setUrlImage(String urlImage) {
-		this.urlImage = urlImage;
-	}
 
 	public Artist getDirector() {
 		return director;

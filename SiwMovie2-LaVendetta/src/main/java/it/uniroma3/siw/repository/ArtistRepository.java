@@ -1,6 +1,8 @@
 package it.uniroma3.siw.repository;
 
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,5 +20,11 @@ public interface ArtistRepository extends JpaRepository<Artist, Long> {
 			+ "from movie_actors "
 			+ "where movie_actors.starred_movies_id = :movieId)", nativeQuery=true)
 	public Iterable<Artist> findActorsNotInMovie(@Param("movieId") Long id);
+
+	public List<Artist> findByName(String name);
+
+	public List<Artist> findBydateOfBirth(int year);
+
+    public List<Artist> findBySurname(String surname);
 	
 }

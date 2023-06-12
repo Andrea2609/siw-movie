@@ -14,7 +14,7 @@
 		<nav class="navbar">
 			<a href="/" class="active"><i class="fa-solid fa-house"></i></a>
 			<a href="/formSearchMovies">Cerca Film</a>
-			<a href="">Cerca Artista</a>
+			<a href="/formSearchArtists">Cerca Artista</a>
 			<span th:if="${#request.userPrincipal}" th:text="'Ciao ' + ${#request.userPrincipal.principal.username}"></span>
 			<a th:if="${#request.userPrincipal}" class="" href="/logout">Logout</a>
 			<a th:unless="${#request.userPrincipal}" class="" href="/login">Login/Register</a>
@@ -29,7 +29,7 @@
 		<center><h1 th:text="'Regista per il film ' + ${movie.title}"></h1></center>
 		<ul>	
 			<li th:each="artist : ${artists}">
-				<a th:href="@{'/admin/setDirectorToMovie/'+ ${artist.id}+'/'+${movie.id}}"><img class="directorAdd-img" th:src="${artist.urlOfPicture}"></a>
+				<a th:href="@{'/admin/setDirectorToMovie/'+ ${artist.id}+'/'+${movie.id}}"><img class="directorAdd-img" th:src="'/' +${artist.image.imagePath}"></a>
 				<a th:href="@{'/admin/setDirectorToMovie/'+ ${artist.id}+'/'+${movie.id}}" th:text="${artist.name} + ' ' + ${artist.surname}">Steven Spielberg</a>
 			</li>
 		</ul>

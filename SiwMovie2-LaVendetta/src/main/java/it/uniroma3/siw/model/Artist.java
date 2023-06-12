@@ -8,10 +8,12 @@ import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
@@ -28,15 +30,24 @@ public class Artist {
 	private String surname;
 		
 	private Date dateOfBirth;
-
-	private String urlOfPicture;
 	
 	@ManyToMany(mappedBy="actors")
 	private Set<Movie> starredMovies;
 	
 	@OneToMany(mappedBy="director")
 	private List<Movie> directedMovies;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Image image;
 	
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
+
 	public Artist(){
 		this.starredMovies = new HashSet<>();
 		this.directedMovies = new LinkedList<>();
@@ -74,13 +85,7 @@ public class Artist {
 		this.dateOfBirth = dateOfBirth;
 	}
 	
-	public String getUrlOfPicture() {
-		return urlOfPicture;
-	}
 	
-	public void setUrlOfPicture(String urlOfPicture) {
-		this.urlOfPicture = urlOfPicture;
-	}
 	
 	public Set<Movie> getActorOf() {
 		return starredMovies;

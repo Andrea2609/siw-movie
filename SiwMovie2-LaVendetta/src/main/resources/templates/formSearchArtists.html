@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-	<title>
-		New Movie
-	</title>
+	<title>Cerca Artisti</title>
 	<link rel="stylesheet" href="/css/stile.css" />
 	<link rel="stylesheet" href="/css/navBar.css"/>
 	<script src="https://kit.fontawesome.com/911a8faad0.js" crossorigin="anonymous"></script>
@@ -23,13 +20,19 @@
 		</nav>
 	</header>
 
-	<div class="formUpdateMovie">
-			<center><div><img class="filmImage-updateMovie" th:src="${artist.image.imagePath}"></div></center>
-			<span class="movieTitle" th:text="${artist.name} + ' ' +${artist.surname} ">Up!</span>
-			
-				
-			
+	<div class="search">
+		<form th:action="@{/foundArtistsByName}" method="post">
+			<h1>Cerca Artista per nome</h1>
+			<input type="text" placeholder="Nome" th:value="${name}" name="name" />
+			<div><input type="submit" /></div>
+		</form>
+
 		
+		<form th:action="@{/foundArtistsBySurname}" method="post">
+			<h1>Cerca Artista per Cognome</h1>
+			<input type="text" placeholder="Cognome" th:value="${surname}" name="surname" />
+			<div><input type="submit"/></div>
+		</form>
 	</div>
 </body>
 

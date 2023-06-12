@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.uniroma3.siw.controller.validator.MovieValidator;
 import it.uniroma3.siw.model.Artist;
 import it.uniroma3.siw.model.Movie;
 import it.uniroma3.siw.model.Rewiew;
@@ -21,8 +20,6 @@ public class MovieService {
     private MovieRepository movieRepository;
     @Autowired
     private ArtistRepository artistRepository;
-    @Autowired
-    private MovieValidator movieValidator;
     @Autowired 
     private RewiewRepository rewiewRepository;
 
@@ -108,4 +105,6 @@ public class MovieService {
     public void deleteById(Long movieId){
         this.movieRepository.deleteById(movieId);
     }
+
+    
 }

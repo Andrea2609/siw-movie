@@ -13,7 +13,7 @@
 		<nav class="navbar">
 			<a href="/" class="active"><i class="fa-solid fa-house"></i></a>
 			<a href="/formSearchMovies">Cerca Film</a>
-			<a href="">Cerca Artista</a>
+			<a href="/formSearchArtists">Cerca Artista</a>
 			<span th:if="${#request.userPrincipal}" th:text="'Ciao ' + ${#request.userPrincipal.principal.username}"></span>
 			<a th:if="${#request.userPrincipal}" class="" href="/logout">Logout</a>
 			<a th:unless="${#request.userPrincipal}" class="" href="/login">Login/Register</a>
@@ -25,7 +25,7 @@
 		<div th:if="${artist}">
 			<h1 th:text="${artist.name} + ' ' +${artist.surname} ">Up!</h1>
 			<h4 th:text="${artist.dateOfBirth}">2000</h4>
-			<img class="filmImage" th:src=${artist.urlOfPicture} />
+			<img class="filmImage" th:src=" '/' + ${artist.image.imagePath}" />
 		</div>
 
 		
@@ -43,7 +43,7 @@
 					<center><div class="noFilm" th:if="${artist.getActorOf().isEmpty()} ">ANCORA NESSUN FILM</div></center>	
 					  <table class="table-int" th:each="movie : ${artist.getActorOf()}">
 						  <tr>
-							  <td><a th:href="@{'/movie' + '/' + ${movie.id}}" ><img class="tableImage" th:src="${movie.urlImage}"/></a></td>
+							  <td><a th:href="@{'/movie' + '/' + ${movie.id}}" ><img class="tableImage" th:src="'/' + ${movie.image.imagePath}"/></a></td>
 							  <td><a th:href="@{'/movie' + '/' + ${movie.id}}" th:text="${movie.title}"></a></td>
 						  </tr>	
 					   </table>
@@ -67,7 +67,7 @@
 					<center><div class="noFilm" th:if="${artist.getDirectorOf().isEmpty()} ">ANCORA NESSUN FILM</div></center>
 					  <table class="table-int" th:each="movie : ${artist.getDirectorOf()}">
 						  <tr>
-							  <td><a th:href="@{'/movie' + '/' + ${movie.id}}" ><img class="tableImage" th:src="${movie.urlImage}"/></a></td>
+							  <td><a th:href="@{'/movie' + '/' + ${movie.id}}" ><img class="tableImage" th:src="'/' + ${movie.image.imagePath}"/></a></td>
 							  <td><a th:href="@{'/movie' + '/' + ${movie.id}}" th:text="${movie.title}"></a></td>
 						  </tr>	
 					   </table>

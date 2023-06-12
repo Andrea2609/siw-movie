@@ -3,11 +3,12 @@
 
 <head>
 	<title>
-		New Movie
+		New Artist
 	</title>
-	<link rel="stylesheet" href="/css/stile.css" />
+	
 	<link rel="stylesheet" href="/css/navBar.css"/>
 	<script src="https://kit.fontawesome.com/911a8faad0.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
 <body>
@@ -16,39 +17,96 @@
 		<nav class="navbar">
 			<a href="/" class="active"><i class="fa-solid fa-house"></i></a>
 			<a href="/formSearchMovies">Cerca Film</a>
-			<a href="">Cerca Artista</a>
+			<a href="/formSearchMovies">Cerca Artista</a>
 			<span th:if="${#request.userPrincipal}" th:text="'Ciao ' + ${#request.userPrincipal.principal.username}"></span>
 			<a th:if="${#request.userPrincipal}" class="" href="/logout">Logout</a>
 			<a th:unless="${#request.userPrincipal}" class="" href="/login">Login/Register</a>
 		</nav>
 	</header>
-	
-	<div class="formNewMovie">
-		<h1>Aggiungi film</h1>
-		<form th:action="@{/admin/movie}" method="POST" th:object="${movie}">
+
+	<style>
+		.form-container {
+		  max-width: 500px;
+		  margin: 0 auto;
+		  background-color: #f5f5f5;
+		  padding: 20px;
+		  border-radius: 4px;
+		}
+	  
+		.form-container label {
+		  margin-bottom: 5px;
+		  font-weight: bold;
+		  
+		}
+	  
+		.form-container input[type="text"],
+		.form-container input[type="int"],
+		.form-container input[type="file"] {
+		  width: 95%;
+		  padding: 8px;
+		  margin-bottom: 10px;
+		  border-radius: 4px;
+		  border: 1px solid #ccc;
+		  box-sizing: border-box;
+		  position: relative;
+		}
+	  
+		.form-container button {
+		  background-color: #4CAF50;
+		  color: white;
+		  padding: 10px 15px;
+		  border: none;
+		  border-radius: 4px;
+		  cursor: pointer;
+		  width: 100%;
+		}
+	  
+		.form-container button:hover {
+		  background-color: #45a049;
+		}
+
+		.div label i {
+			margin-right: 5px;
+		}
+
+	  </style>
+	  
+	  <div class="form-container">
+		<form th:action="@{/admin/movie}" method="POST" enctype="multipart/form-data" th:object="${movie}">
+		  <div>
+			<label for="nome">
+			  <i class="fa-solid fa-film"></i>
+			</label>
+			<input type="text" id="title" placeholder="Titolo" th:name="title" th:field="${movie.title}" required>
+			<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+		  </div>
+	  
+		  <div>
+			<label for="dataNascita">
+			  <i class="fas fa-calendar-alt"></i>
+			</label>
+			<input type="int" id="year" th:name="year" th:field="${movie.year}" required>
+			<span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span>
+		  </div>
 		
-			
-			<div>
-				<span><input type="text" placeholder="Titolo" th:field="${movie.title}" /></span>
-				<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
-				</span>
-			</div>
-
-			<div>
-				<span><input type="text" placeholder="Year" th:field="${movie.year}" /></span>
-				<span th:if="${#fields.hasErrors('year')}" th:errors="*{year}">
-				</span>
-			</div>
-
-			<div>
-				<span><input type="text" placeholder="UrlImage" th:field="${movie.urlImage}" /></span>
-			</div>
-			
-			<div class="formNewMovie-btn">
-				<button type="submit">Conferma</button>
-			</div>
+	  
+		  <div>
+			<label for="foto">
+			  <i class="fas fa-image"></i>
+			</label>
+			<input type="file" id="foto" th:name="foto">
+		  </div>
+	  
+		  <center><div class="formNewArtist-btn">
+			<button type="submit">Conferma</button>
+		  </div></center>
 		</form>
-	</div>
+	  </div>
+	  
+	  
+	  
+	  
+	  
 </body>
 
 </html>

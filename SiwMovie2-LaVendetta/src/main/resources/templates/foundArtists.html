@@ -2,10 +2,8 @@
 <html>
 
 <head>
-	<title>
-		New Movie
-	</title>
-	<link rel="stylesheet" href="/css/stile.css" />
+	<title>Artisti</title>
+	<link rel="stylesheet" href="/css/stile.css"/>
 	<link rel="stylesheet" href="/css/navBar.css"/>
 	<script src="https://kit.fontawesome.com/911a8faad0.js" crossorigin="anonymous"></script>
 </head>
@@ -22,14 +20,34 @@
 			<a th:unless="${#request.userPrincipal}" class="" href="/login">Login/Register</a>
 		</nav>
 	</header>
-
-	<div class="formUpdateMovie">
-			<center><div><img class="filmImage-updateMovie" th:src="${artist.image.imagePath}"></div></center>
-			<span class="movieTitle" th:text="${artist.name} + ' ' +${artist.surname} ">Up!</span>
-			
-				
-			
+	
+	<div class="foundMovies">
+	<table class="table-ext">
 		
+		<thead>
+			  <tr>
+				  <th>Nome</th>
+				  <th>Cognome</th> 
+			</tr>		
+		</thead>
+	  
+	  <tbody>
+		
+		  <tr>	
+		  <td colspan="2">	
+			  <div class="divinterno-foundMovies" >	
+				<center><div style="color: #ffffff;" th:if="${artists.isEmpty()}">Non ci sono Artisti che soddisfano i requisiti</div></center>	
+				  <table class="table-int" th:each="artist : ${artists}">
+					  <tr>
+						<td><a th:href="@{'/artist' + '/' + ${artist.id}}" th:text="${artist.name}"></a></td>
+						  <td><a th:href="@{'/artist' + '/' + ${artist.id}}" th:text="${artist.surname}"></a></td>
+					  </tr>	
+				   </table>
+			  </div>
+		  </td>
+		 </tr> 
+	  </tbody>
+	  </table>
 	</div>
 </body>
 

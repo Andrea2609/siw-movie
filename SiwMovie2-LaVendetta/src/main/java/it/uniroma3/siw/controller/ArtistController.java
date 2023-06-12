@@ -1,6 +1,6 @@
 package it.uniroma3.siw.controller;
 
-import java.util.Collections;
+import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,23 +9,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Artist;
-import it.uniroma3.siw.model.Movie;
+import it.uniroma3.siw.model.Image;
 import it.uniroma3.siw.repository.ArtistRepository;
-import it.uniroma3.siw.repository.MovieRepository;
 import it.uniroma3.siw.service.ArtistService;
-import it.uniroma3.siw.service.MovieService;
+import it.uniroma3.siw.service.StorageService;
 
 @Controller
 public class ArtistController {
 	
 	@Autowired
 	private ArtistService artistService;
-	@Autowired 
-	private MovieService movieService;
+
 	@Autowired 
 	private ArtistRepository artistRepository;
+
+	@Autowired
+	private StorageService storageService;
 
 	@GetMapping(value="/admin/formUpdateArtist/{id}")
 	public String formUpdateArtist(@PathVariable Long id, Model model) {
@@ -52,9 +55,15 @@ public class ArtistController {
 	}
 	
 	@PostMapping("/admin/artist")
-	public String newArtist(@ModelAttribute Artist artist, Model model) {
+	public String newArtist(@ModelAttribute Artist artist, @RequestParam ("foto") MultipartFile file , Model model) throws IOException {
 		if (!this.artistService.existsByNameAndSurname(artist)) {
-			this.artistService.save(artist); 
+			
+			if(!file.isEmpty()){
+				Image fileName = storageService.uploadImage(file);                
+				artist.setImage(fileName);             
+			}
+			
+			this.artistService.save(artist);
 			model.addAttribute("artist", artist);
 			model.addAttribute("artists", this.artistRepository.findAll());
 			return "redirect:/admin/artists";
@@ -81,5 +90,22 @@ public class ArtistController {
 	public String getArtists(Model model) {
 		model.addAttribute("artists", this.artistRepository.findAll());
 		return "artists.html";
+	}
+
+	@GetMapping("/formSearchArtists")
+	public String formSearchArtists() {
+		return "formSearchArtists.html";
+	}
+
+	@PostMapping("/foundArtistsByName")
+	public String searchArtistsByName(Model model, @RequestParam String name) {
+		model.addAttribute("artists", this.artistService.findByName(name));
+		return "foundArtists.html";
+	}
+
+	@PostMapping("/foundArtistsBySurname")
+	public String searchArtistsBySurname(Model model, @RequestParam String surname) {
+		model.addAttribute("artists", this.artistService.findBySurname(surname));
+		return "foundArtists.html";
 	}
 }

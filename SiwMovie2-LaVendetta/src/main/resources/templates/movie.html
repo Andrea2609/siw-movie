@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="/css/formStile.css" />
 	<script src="https://kit.fontawesome.com/911a8faad0.js" crossorigin="anonymous"></script>
 	<style>
+
   .rating {
     display: inline-block;
     unicode-bidi: bidi-override;
@@ -19,6 +20,7 @@
     padding: 0;
     cursor: pointer;
 	display: flex;
+	direction: rtl;
   }
 
   .rating-star {
@@ -73,7 +75,7 @@
 		<nav class="navbar">
 			<a href="/" class="active"><i class="fa-solid fa-house"></i></a>
 			<a href="/formSearchMovies">Cerca Film</a>
-			<a href="">Cerca Artista</a>
+			<a href="/formSearchArtists">Cerca Artista</a>
 			<span th:if="${#request.userPrincipal}" th:text="'Ciao ' + ${#request.userPrincipal.principal.username}"></span>
 			<a th:if="${#request.userPrincipal}" class="" href="/logout">Logout</a>
 			<a th:unless="${#request.userPrincipal}" class="" href="/login">Login/Register</a>
@@ -85,7 +87,7 @@
 	    <div th:if="${movie}">
 	        <h1 th:text="${movie.title}">Up!</h1>
 	        <h4 th:text="${movie.year}">2000</h4>
-	        <img class="filmImage" width="10%" th:src=${movie.urlImage} />
+	        <img class="filmImage" width="10%" th:src=" '/' + ${movie.image.imagePath}"/>
 	    </div>
 	    
 		<table class="table-ext-regista-attore">
@@ -103,7 +105,7 @@
 						<center><div class="noFilm" th:if="${movie.director == null}">NESSUN REGISTA</div></center>	
 					  	<table class="table-int" th:if="${movie.director}">
 						  	<tr>
-							  	<td><a th:href="@{'/artist' + '/' + ${movie.director.id}}"><img class="tableImage" th:src="${movie.director.urlOfPicture}"/></a></td>
+							  	<td><a th:href="@{'/artist' + '/' + ${movie.director.id}}"><img class="tableImage" th:src="'/' + ${directorImage}"/></a></td>
 								<td><a th:href="@{'/artist' + '/' + ${movie.director.id}}" th:text="${movie.director.name} + ' ' + ${movie.director.surname}"></a></td>
 						  	</tr>	
 					   	</table>
@@ -127,7 +129,7 @@
 						<center><div class="noFilm" th:if="${movie.actors.isEmpty()}">NESSUN ATTORE</div></center>	
 					  	<table class="table-int" th:each="actor : ${movie.actors}">
 						  	<tr>
-							  	<td><a th:href="@{'/artist' + '/' + ${actor.id}}"><img class="tableImage" th:src="${actor.urlOfPicture}"/></a></td>
+							  	<td><a th:href="@{'/artist' + '/' + ${actor.id}}"><img class="tableImage" th:src="'/' + ${actor.image.imagePath}"/></a></td>
 							  	<td><a th:href="@{'/artist' + '/' + ${actor.id}}" th:text="${actor.name} + ' ' + ${actor.surname}"></a></td>
 						  	</tr>	
 					   	</table>
@@ -186,15 +188,15 @@
 				<div class="input-group">
 				  <span class="input-group-addon"><i class="fa-regular fa-star"></i></span>
 				  <div class="rating">
-					<input type="radio" id="star1" name="rating" value="1">
+					<input type="radio" id="star1" name="rating" value="5">
 					<label class="rating-star" for="star1"></label>
-					<input type="radio" id="star2" name="rating" value="2">
+					<input type="radio" id="star2" name="rating" value="4">
 					<label class="rating-star" for="star2"></label>
 					<input type="radio" id="star3" name="rating" value="3">
 					<label class="rating-star" for="star3"></label>
-					<input type="radio" id="star4" name="rating" value="4">
+					<input type="radio" id="star4" name="rating" value="2">
 					<label class="rating-star" for="star4"></label>
-					<input type="radio" id="star5" name="rating" value="5">
+					<input type="radio" id="star5" name="rating" value="1">
 					<label class="rating-star" for="star5"></label>
 
 
